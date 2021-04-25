@@ -1,0 +1,14 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:11
+
+    environment:
+      JVM_OPTS: -Xms512m -Xmx1200m
+      TERM: dumb
+
+    steps:
+      - checkout
+      - run: ./mvnw clean install
