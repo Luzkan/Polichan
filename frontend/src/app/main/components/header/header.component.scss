@@ -1,0 +1,10 @@
+@import "src/styles/shared";
+
+:host {
+  min-height: 50px;
+  background: $background-secondary-color;
+}
+
+.header__title {
+  color: $secondary-color;
+}

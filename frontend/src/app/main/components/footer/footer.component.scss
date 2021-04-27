@@ -1,0 +1,17 @@
+@import "src/styles/shared";
+
+:host {
+  margin-top: auto;
+  min-height: 50px;
+  background: $background-secondary-color;
+}
+
+.footer__title {
+  color: $secondary-color;
+}
+
+@include media-breakpoint-down(xs) {
+  :host {
+    display: none;
+  }
+}

@@ -1,0 +1,8 @@
+@import "src/styles/shared";
+
+:host {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: $background-color;
+}
