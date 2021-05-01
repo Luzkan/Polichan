@@ -1,25 +1,37 @@
 <div class="container">
 <!--  <p (click)="select()">{{testVariable}}</p>-->
-  <div class="col-lg-7">
-    <div class="card">
+  <div class="col-lg-8">
+    <div class="reply-form card">
       <div class="card-body">
         <div class="form-group row">
-          <label for="example-email-input" class="col-md-2 col-form-label">Email</label>
+          <label for="email-input" class="col-md-3 col-form-label">Email</label>
 
-          <div class="col-md-10">
-            <input class="form-control form-control-sm" type="text" value="" id="example-email-input">
+          <div class="col-md-9">
+            <input class="form-control form-control-sm" type="text" value="" id="email-input">
           </div>
 
-          <label for="example-email-input" class="col-md-2 col-form-label">Topic</label>
-          <div class="col-md-10">
-            <input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+          <label for="title-input" class="col-md-3 col-form-label">Topic</label>
+          <div class="col-md-9">
+            <input class="form-control form-control-sm" type="text" value="" id="title-input">
           </div>
+
+
+
+<!--          <div class="mb-3">-->
+<!--            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>-->
+<!--            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>-->
+<!--          </div>-->
 
 <!--          <ckeditor [editor]="Editor" data="<p>Content of the editor.</p>"></ckeditor>-->
 
-          <label for="example-password-input" class="col-md-2 col-form-label">Password</label>
-          <div class="col-md-10">
-            <input class="form-control form-control-sm" type="password" value="" id="example-password-input">
+          <label for="password-input" class="col-md-3 col-form-label">Password</label>
+          <div class="col-md-9">
+            <input class="form-control form-control-sm" type="password" value="" id="password-input">
+          </div>
+
+          <label for="text-body-input" class="col-md-3 col-form-label">Text</label>
+          <div class="col-md-9">
+            <textarea class="form-control form-control-sm" type="text" value="" id="text-body-input" rows="4"></textarea>
           </div>
 
         </div>
