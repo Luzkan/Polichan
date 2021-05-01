@@ -3,6 +3,7 @@
 
 $background-color: #1e1e1e;
 $background-secondary-color: #2a2a2a;
+$background-accent-color: #3c3c3c;
 
 $primary-color: #cecece;
 $secondary-color: #e5e5e5;
@@ -10,4 +11,6 @@ $secondary-color: #e5e5e5;
 $accent-color: #c62b2b;
 $accent-secondary-color: #ff5454;
 
-
+// Forms
+$form-label-color: $background-secondary-color;
+$form-text-color: text-muted;

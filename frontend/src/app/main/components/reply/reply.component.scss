@@ -17,7 +17,7 @@
 }
 
 .reply-form > .card-body > .form-group {
-  margin-bottom: 6px;
+  margin-bottom: calc(0.375rem + 1px);
 }
 
 label {
@@ -27,4 +27,27 @@ label {
 
 .form-control, .custom-file-input {
   width: 100%;
+}
+
+input, input:focus, textarea, textarea:focus, .custom-file-label {
+  background-color: $background-secondary-color;
+  color: $primary-color;
+}
+
+.custom-file-label {
+  font-weight: normal;
+  font-size: medium;
+}
+
+input:focus, textarea:focus {
+  //outline-color: $accent-color;
+  border-color: $accent-secondary-color;
+  box-shadow: 0 0 0 1px $accent-color;
+}
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+  color: $primary-color;
+  background-color: $background-accent-color;
+}
+.custom-file-input::after {
+  color: red;
 }
