@@ -7,15 +7,14 @@ import {FooterComponent} from './components/footer/footer.component';
 import {HeaderComponent} from './components/header/header.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HomeComponent} from './components/home/home.component';
-import {TestComponent} from "./components/test/test.component";
-import {PostComponent} from "./components/post/post.component";
-import {ReplyComponent} from "./components/reply/reply.component";
+import {TestComponent} from './components/test/test.component';
+import {PostComponent} from './components/post/post.component';
+import {ReplyComponent} from './components/reply/reply.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FormsModule} from '@angular/forms';
-import {NavbarComponent} from "./components/navbar/navbar.component";
-import {ThreadComponent} from "./components/thread/thread.component";
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {ThreadComponent} from './components/thread/thread.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
 
 
 @NgModule({

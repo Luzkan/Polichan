@@ -11,10 +11,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  boardMainList = ["poli/", "random/"]
-  boardThematicList = ["it/", "math/", "med/", "bio/", "chem/", "phys/", "elec/", "bud/", "arch/", "mech/"]
+  boardMainList = ['poli/', 'random/']
+  boardThematicList = ['it/', 'math/', 'med/', 'bio/', 'chem/', 'phys/', 'elec/', 'bud/', 'arch/', 'mech/']
 
   selected(event: String) {
-    console.log(event)
+    console.log(event);
   }
 }

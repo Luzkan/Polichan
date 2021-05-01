@@ -13,7 +13,7 @@ export class TestComponent implements OnInit {
   }
 
   @Input()
-  testVariable: String = ""
+  testVariable: String = ''
 
   @Output()
   testOutput = new EventEmitter()

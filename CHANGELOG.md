@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <img src="./docs/img/v0-1-0.png" width="750"/>
 
+### Fixed
+- Linter Warnings
+    - Double quotes changed to single quote in strings
+    - Removed unused imports
+    - Missed one semicolon
 
 ## [0.0.2] - 2021-04-27
 ### Added

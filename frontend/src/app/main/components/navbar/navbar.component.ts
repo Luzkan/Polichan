@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   }
 
   @Input()
-  navbarBoardName: String = ""
+  navbarBoardName: String = ''
 
   @Output()
   testOutput = new EventEmitter()

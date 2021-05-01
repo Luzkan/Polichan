@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-post',
@@ -11,5 +11,4 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

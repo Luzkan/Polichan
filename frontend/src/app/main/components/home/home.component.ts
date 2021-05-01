@@ -12,9 +12,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  testList = ["1"]
+  testList = ['1']
 
   selected(event: String) {
-    console.log(event)
+    console.log(event);
   }
 }

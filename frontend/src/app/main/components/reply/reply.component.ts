@@ -1,4 +1,4 @@
-import {Component, NgModule, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 // import * as ClassicEditor from '@ckeditor/ckeditor5-build-balloon-block';
 
 
@@ -13,10 +13,9 @@ export class ReplyComponent implements OnInit {
   constructor() { }
 
   // public Editor = ClassicEditor;
-  selectValue = ["1"]
+  selectValue = ['1']
 
   ngOnInit() {
 
   }
-
 }
