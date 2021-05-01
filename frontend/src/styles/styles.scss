@@ -3,9 +3,15 @@
 
 body {
   margin: 0;
-  background: #1e1e1e;
-  color: #cecece;
+  background: #1e1e1e; // $background-color
+  color: #cecece; // $primary-color
   font-family: Roboto, Helvetica, sans-serif;
 }
 
+a {
+  color: #c62b2b; // $accent-color
+}
 
+a:hover {
+  color: #ff5454; // $text-a-hover
+}

@@ -10,9 +10,10 @@ import {HomeComponent} from './components/home/home.component';
 import {TestComponent} from "./components/test/test.component";
 import {PostComponent} from "./components/post/post.component";
 import {ReplyComponent} from "./components/reply/reply.component";
-import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
-import { NavbarComponent } from "./components/navbar/navbar.component";
+import {NgSelectModule} from '@ng-select/ng-select';
+import {FormsModule} from '@angular/forms';
+import {NavbarComponent} from "./components/navbar/navbar.component";
+import {ThreadComponent} from "./components/thread/thread.component";
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
@@ -27,6 +28,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
     PostComponent,
     ReplyComponent,
     NavbarComponent,
+    ThreadComponent,
   ],
   imports: [
     NgbModule,

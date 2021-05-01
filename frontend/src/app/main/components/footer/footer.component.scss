@@ -2,12 +2,8 @@
 
 :host {
   margin-top: auto;
-  min-height: 50px;
+  min-height: 5px;
   background: $background-secondary-color;
-}
-
-.footer__title {
-  color: $secondary-color;
 }
 
 @include media-breakpoint-down(xs) {

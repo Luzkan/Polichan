@@ -1,19 +1,20 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.scss'],
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class TestComponent implements OnInit {
+
+export class NavbarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
   }
 
   @Input()
-  testVariable: String = ""
+  navbarBoardName: String = ""
 
   @Output()
   testOutput = new EventEmitter()

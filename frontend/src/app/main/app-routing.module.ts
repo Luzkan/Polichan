@@ -4,6 +4,7 @@ import {HomeComponent} from './components/home/home.component';
 import {TestComponent} from "./components/test/test.component";
 import {PostComponent} from "./components/post/post.component";
 import {ReplyComponent} from "./components/reply/reply.component";
+import {ThreadComponent} from "./components/thread/thread.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'reply',
     component: ReplyComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'thread',
+    component: ThreadComponent,
     pathMatch: 'full',
   },
 ];
