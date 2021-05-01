@@ -24,4 +24,3 @@ import {HomeComponent} from './components/home/home.component';
   bootstrap: [AppComponent],
 })
 export class AppModule { }
-
