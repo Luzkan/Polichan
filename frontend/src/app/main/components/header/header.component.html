@@ -1,3 +1,28 @@
-<header class="container">
-  <h3 class="header__title">Happy header</h3>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Polichan</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">*/ <span class="sr-only">(current)</span></a>
+          </li>
+          <app-navbar *ngFor="let bName of boardMainList" (testOutput)="selected(bName)" [navbarBoardName]="bName"></app-navbar>
+          <app-navbar *ngFor="let bName of boardThematicList" (testOutput)="selected(bName)" [navbarBoardName]="bName"></app-navbar>
+        </ul>
+
+        <ul class="navbar-nav">
+          <li class="nav-item my-1 my-lg-0">
+            <a class="nav-link" href="#">Options</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
 </header>
+

@@ -1,6 +1,26 @@
-// temporary
-$primary-color: #000091;
-$secondary-color: white;
+// scheme
+$primary-color: #cecece;
+$secondary-color: #e5e5e5;
+$muted-color: #707070;
+$muted-accent-color: #674444;
 
-$background-color: white;
-$background-secondary-color: $primary-color;
+$accent-color: #c62b2b;
+$accent-secondary-color: #ff5454;
+
+// bg
+$background-color: #1e1e1e;
+$background-secondary-color: #2a2a2a;
+$background-accent-color: #3c3c3c;
+
+// text
+$text-color: $primary-color;
+$text-muted-color: $muted-color;
+
+// a
+$text-a-color: $accent-color;
+$text-a-muted: $muted-accent-color;
+$text-a-hover: $accent-secondary-color;
+
+// forms
+$form-label-color: $background-secondary-color;
+$form-text-color: text-muted;
