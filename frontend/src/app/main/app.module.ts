@@ -10,6 +10,11 @@ import {HomeComponent} from './components/home/home.component';
 import {TestComponent} from "./components/test/test.component";
 import {PostComponent} from "./components/post/post.component";
 import {ReplyComponent} from "./components/reply/reply.component";
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
+
 
 @NgModule({
   declarations: [
@@ -23,6 +28,9 @@ import {ReplyComponent} from "./components/reply/reply.component";
   ],
   imports: [
     NgbModule,
+    NgSelectModule,
+    FormsModule,
+    // CKEditorModule,
     BrowserModule,
     AppRoutingModule,
   ],

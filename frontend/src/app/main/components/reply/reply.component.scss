@@ -1,25 +1,9 @@
-.postNickname {
-  font-weight: bold;
-}
-
-.postBadge {
-
-}
-
-.postDateTime {
-  font-style: italic;
+.upload {
   font-weight: lighter;
+  font-size: x-small;
+  padding-left: -20px;
 }
 
-.postID {
-  font-weight: normal;
-}
-
-.postImage {
-  max-height: 256px;
-  max-width: 384px;
-}
-
-.postText {
-  font-weight: normal;
+.upload > ul > li {
+  margin-left: -20px;
 }

@@ -1,25 +1,39 @@
 <div class="container">
 <!--  <p (click)="select()">{{testVariable}}</p>-->
-
-  <div class="col-6">
+  <div class="col-lg-7">
     <div class="card">
       <div class="card-body">
-        <div class="postInformation">
-          <p>
-            <span class="postNickname">Anonymous</span>
-            <span class="postBadge badge badge-danger ml-1">OP</span> |
-            <span class="postDateTime">14 minutes ago</span> |
-            <span class="postID">1</span>
-          </p>
+        <div class="form-group row">
+          <label for="example-email-input" class="col-md-2 col-form-label">Email</label>
+
+          <div class="col-md-10">
+            <input class="form-control form-control-sm" type="text" value="" id="example-email-input">
+          </div>
+
+          <label for="example-email-input" class="col-md-2 col-form-label">Topic</label>
+          <div class="col-md-10">
+            <input class="form-control form-control-sm" type="text" value="" id="example-text-input">
+          </div>
+
+<!--          <ckeditor [editor]="Editor" data="<p>Content of the editor.</p>"></ckeditor>-->
+
+          <label for="example-password-input" class="col-md-2 col-form-label">Password</label>
+          <div class="col-md-10">
+            <input class="form-control form-control-sm" type="password" value="" id="example-password-input">
+          </div>
+
         </div>
-        <div class="media mb-4">
-          <img class="postImage d-flex align-self-start rounded mr-3 avatar-sm img-fluid" src="assets/images/obrazek1.jpg" alt="Jakiś Obrazeczek">
-          <div class="postText media-body">
-            <p>Jakiś tekst. <br/> Jakiś tekst. <br/> Jakiś tekst.</p>
+
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Insert an Image...</label>
+          <div class="m-1 upload">
+            <ul>
+              <li>Supported filetypes: <code>.jpg</code>, <code>.png</code>, <code>.jpeg</code>, <code>.gif</code></li>
+              <li>Maximum filesize: <code>5MB</code></li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
 </div>
