@@ -2,11 +2,11 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from 
 
 @Component({
   selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss'],
+  templateUrl: './reply.component.html',
+  styleUrls: ['./reply.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class PostComponent implements OnInit {
+export class ReplyComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {

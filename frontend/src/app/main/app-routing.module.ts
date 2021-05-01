@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {TestComponent} from "./components/test/test.component";
 import {PostComponent} from "./components/post/post.component";
+import {ReplyComponent} from "./components/reply/reply.component";
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: 'post',
     component: PostComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'reply',
+    component: ReplyComponent,
     pathMatch: 'full',
   },
 ];

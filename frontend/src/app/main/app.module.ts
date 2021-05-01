@@ -9,6 +9,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HomeComponent} from './components/home/home.component';
 import {TestComponent} from "./components/test/test.component";
 import {PostComponent} from "./components/post/post.component";
+import {ReplyComponent} from "./components/reply/reply.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {PostComponent} from "./components/post/post.component";
     HomeComponent,
     TestComponent,
     PostComponent,
+    ReplyComponent,
   ],
   imports: [
     NgbModule,
