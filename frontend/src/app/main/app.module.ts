@@ -7,6 +7,8 @@ import {FooterComponent} from './components/footer/footer.component';
 import {HeaderComponent} from './components/header/header.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HomeComponent} from './components/home/home.component';
+import {TestComponent} from "./components/test/test.component";
+import {PostComponent} from "./components/post/post.component";
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import {HomeComponent} from './components/home/home.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    TestComponent,
+    PostComponent,
   ],
   imports: [
     NgbModule,
