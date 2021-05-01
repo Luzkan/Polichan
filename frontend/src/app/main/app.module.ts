@@ -12,6 +12,7 @@ import {PostComponent} from "./components/post/post.component";
 import {ReplyComponent} from "./components/reply/reply.component";
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from "./components/navbar/navbar.component";
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
@@ -25,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     TestComponent,
     PostComponent,
     ReplyComponent,
+    NavbarComponent,
   ],
   imports: [
     NgbModule,
