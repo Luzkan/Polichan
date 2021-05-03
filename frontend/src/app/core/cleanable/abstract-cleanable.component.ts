@@ -1,6 +1,6 @@
 import {Subscription} from 'rxjs';
 import {Directive, OnDestroy} from '@angular/core';
-import {Dictionary} from '../dictionary/dictionary.model';
+import {Dictionary} from '../types/dictionary.model';
 import {v4 as uuid} from 'uuid';
 
 @Directive()

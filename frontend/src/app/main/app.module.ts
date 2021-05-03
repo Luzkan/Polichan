@@ -19,6 +19,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import {appConfig} from '../../environments/app-config';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from '../core/mock-api/in-memory-data.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -43,7 +44,8 @@ import {InMemoryDataService} from '../core/mock-api/in-memory-data.service';
     HttpClientModule,
     AppRoutingModule,
     NgxSpinnerModule,
-    appConfig.production ? [] : HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {delay: 100}),
+    BrowserAnimationsModule,
+    appConfig.production ? [] : HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {delay: 1000}),
   ],
   providers: [
     {

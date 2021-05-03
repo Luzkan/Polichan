@@ -7,15 +7,15 @@ import {Thread} from '../../main/models/thread.model';
   providedIn: 'root',
 })
 export class InMemoryDataService implements InMemoryDbService {
-  get threads(): Thread[] {
-    return [
-      {name: 'name1'},
-    ];
-  }
-
   createDb() {
     return {
       threads: this.threads,
     };
+  }
+
+  get threads(): Thread[] {
+    return [
+      {name: 'name1'},
+    ];
   }
 }
