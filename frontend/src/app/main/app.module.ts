@@ -14,6 +14,10 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {FormsModule} from '@angular/forms';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {ThreadComponent} from './components/thread/thread.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {SpinnerInterceptor} from '../core/spinner/spinner-interceptor';
+import {NgxSpinnerModule} from 'ngx-spinner';
+
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
@@ -36,8 +40,16 @@ import {ThreadComponent} from './components/thread/thread.component';
     // CKEditorModule,
     BrowserModule,
     AppRoutingModule,
+    NgxSpinnerModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

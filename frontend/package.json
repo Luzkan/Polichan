@@ -27,8 +27,10 @@
     "@ng-bootstrap/ng-bootstrap": "^9.1.0",
     "@ng-select/ng-select": "^6.1.0",
     "bootstrap": "^4.5.0",
+    "ngx-spinner": "^11.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "uuid": "^8.3.2",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
