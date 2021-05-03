@@ -10,10 +10,11 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 })
 
 export class ReplyComponent implements OnInit {
-  constructor() { }
+  constructor() {
+  }
 
   // public Editor = ClassicEditor;
-  selectValue = ['1']
+  selectValue = ['1'];
 
   ngOnInit() {
 

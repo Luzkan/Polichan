@@ -17,6 +17,8 @@ module.exports = {
     '@typescript-eslint',
   ],
   'rules': {
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
     'max-len': ['error', {'code': 120}],
     'require-jsdoc': 0,
     'new-cap': 0,

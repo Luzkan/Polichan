@@ -5,7 +5,7 @@
 import {baseEnvironment} from './base-enviroment';
 import {environment} from './environment';
 
-export const appConfiguration = {
+export const appConfig = {
   ...baseEnvironment,
   ...environment,
 };
