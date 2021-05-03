@@ -2,9 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {TestComponent} from './components/test/test.component';
-import {PostComponent} from './components/post/post.component';
-import {ReplyComponent} from './components/reply/reply.component';
-import {ThreadComponent} from './components/thread/thread.component';
+import {MainpageThreadComponent} from './components/thread/mainpage-thread.component';
 
 const routes: Routes = [
   {
@@ -18,18 +16,8 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'post',
-    component: PostComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'reply',
-    component: ReplyComponent,
-    pathMatch: 'full',
-  },
-  {
     path: 'thread',
-    component: ThreadComponent,
+    component: MainpageThreadComponent,
     pathMatch: 'full',
   },
 ];

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="threads | async as threads">
 
   <!--  <ng-container *ngFor="let item of testList">-->
   <!--    <app-test *ngFor="let item of testList" [testVariable]="item"></app-test>-->
@@ -8,10 +8,8 @@
   <app-reply></app-reply>
 
 
-  <div calss="thread-list">
-    <!--  TODO: Loop through some amount of threads and display, ex.: -->
-    <app-thread></app-thread>
-    <app-thread></app-thread>
+  <div calss="thread-list" *ngIf="threads.length > 0">
+    <app-thread *ngFor="let thread of threads" [thread]="thread"></app-thread>
   </div>
 
   <!--  </ng-container>-->

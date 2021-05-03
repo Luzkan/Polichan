@@ -12,14 +12,12 @@ import {PostComponent} from './components/post/post.component';
 import {ReplyComponent} from './components/reply/reply.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FormsModule} from '@angular/forms';
-import {ThreadComponent} from './components/thread/thread.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {SpinnerInterceptor} from '../core/spinner/spinner-interceptor';
+import {MainpageThreadComponent} from './components/thread/mainpage-thread.component';
+import {HttpClientModule} from '@angular/common/http';
 import {NgxSpinnerModule} from 'ngx-spinner';
-import {appConfig} from '../../environments/app-config';
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService} from '../core/mock-api/in-memory-data.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CoreModule} from '../core/core.module';
+import {SharedModule} from '../shared/shared.module';
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -33,26 +31,20 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     TestComponent,
     PostComponent,
     ReplyComponent,
-    ThreadComponent,
+    MainpageThreadComponent,
   ],
   imports: [
     NgbModule,
-    NgSelectModule,
     FormsModule,
+    NgSelectModule,
     // CKEditorModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    appConfig.production ? [] : HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {delay: 1000}),
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: SpinnerInterceptor,
-      multi: true,
-    },
+    CoreModule,
+    SharedModule,
   ],
   bootstrap: [AppComponent],
 })

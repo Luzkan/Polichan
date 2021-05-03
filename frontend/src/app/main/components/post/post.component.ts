@@ -1,4 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
+import {Post} from '../../models/post.model';
+import {Optional} from '../../../core/types/optional.model';
 
 @Component({
   selector: 'app-post',
@@ -6,9 +8,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
   styleUrls: ['./post.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class PostComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class PostComponent {
+  @Input()
+  post: Optional<Post>;
 }

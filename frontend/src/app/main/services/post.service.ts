@@ -1,27 +1,35 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Thread} from '../models/thread.model';
 import {ApiService} from '../../core/api/api.service';
 import {Dictionary} from '../../core/types/dictionary.model';
 import {Post} from '../models/post.model';
+import {BaseApiService} from '../../core/api/base-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PostService {
+export class PostService extends BaseApiService {
   private static POST_URL = '/api/posts/{id}';
-  private static POSTS_URL = '/api/thread/{id}/posts';
+  private static POSTS_URL = '/api/{id}';
+  // TODO:
+  // private static POSTS_URL = '/api/thread/{id}/posts';
 
-  constructor(private readonly apiService: ApiService) {
+  constructor(apiService: ApiService) {
+    super(apiService);
   }
 
-  getPost(id: string): Observable<Thread> {
+  getPost(id: string): Observable<Post> {
     const pathParams: Dictionary<string> = {'id': id};
-    return this.apiService.get<Thread>(PostService.POST_URL, pathParams);
+    return this.apiService.get<Post>(PostService.POST_URL, pathParams);
   }
 
-  getPostsForThreadId(threadId: string): Observable<Post[]> {
-    const pathParams: Dictionary<string> = {'id': threadId};
-    return this.apiService.get<Thread[]>(PostService.POSTS_URL, pathParams);
+  // TODO:
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getPosts(threadId: string, limit?: number): Observable<Post[]> {
+    const queryParam: Dictionary<string> = {};
+    const pathParams: Dictionary<string> = {};
+    // this.addOptionalEntry(queryParam, 'limit', String(limit));
+    this.addOptionalEntry(pathParams, 'id', threadId);
+    return this.apiService.get<Post[]>(PostService.POSTS_URL, pathParams, queryParam);
   }
 }

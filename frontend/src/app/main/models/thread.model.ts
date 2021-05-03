@@ -1,3 +1,5 @@
 export interface Thread {
-  name: string
+  id: string,
+  nickname: string,
+  date: Date
 }

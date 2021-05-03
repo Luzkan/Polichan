@@ -1,3 +1,8 @@
 export interface Post {
-  name: string
+  id: string,
+  threadId: string,
+  nickname: string,
+  content: string,
+  imgUrl?: string,
+  date: Date,
 }
