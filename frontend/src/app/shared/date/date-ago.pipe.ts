@@ -5,7 +5,7 @@ import {Pipe, PipeTransform} from '@angular/core';
   pure: true,
 })
 export class DateAgoPipe implements PipeTransform {
-  static intervals = {
+  static INTERVALS = {
     'year': 365 * 24 * 60 * 60,
     'month': 30 * 24 * 60 * 60,
     'week': 7 * 24 * 60 * 60,
@@ -21,7 +21,7 @@ export class DateAgoPipe implements PipeTransform {
       return 'Just now';
     }
 
-    for (const [unit, value] of Object.entries(DateAgoPipe.intervals)) {
+    for (const [unit, value] of Object.entries(DateAgoPipe.INTERVALS)) {
       const counter = Math.floor(seconds / value);
       if (counter > 0) {
         if (counter === 1) {
