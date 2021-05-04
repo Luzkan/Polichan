@@ -10,8 +10,8 @@ import {BaseApiService} from '../../core/api/base-api.service';
   providedIn: 'root',
 })
 export class ThreadService extends BaseApiService {
-  private static THREAD_URL = '/api/threads/{id}';
-  private static THREADS_URL = '/api/threads';
+  static THREAD_URL = '/api/threads/{id}';
+  static THREADS_URL = '/api/threads';
 
   constructor(apiService: ApiService) {
     super(apiService);

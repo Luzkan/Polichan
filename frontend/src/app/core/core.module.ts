@@ -8,7 +8,7 @@ import {SpinnerInterceptor} from './spinner/spinner-interceptor';
 @NgModule({
   declarations: [],
   imports: [
-    appConfig.production ? [] : HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {delay: 1000}),
+    appConfig.inMemoryApiEnabled ? HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {delay: 1000}): [],
   ],
   providers: [
     {
