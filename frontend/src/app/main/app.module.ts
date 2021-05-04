@@ -12,8 +12,13 @@ import {PostComponent} from './components/post/post.component';
 import {ReplyComponent} from './components/reply/reply.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FormsModule} from '@angular/forms';
-import {NavbarComponent} from './components/navbar/navbar.component';
-import {ThreadComponent} from './components/thread/thread.component';
+import {MainpageThreadComponent} from './components/thread/mainpage-thread.component';
+import {HttpClientModule} from '@angular/common/http';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CoreModule} from '../core/core.module';
+import {SharedModule} from '../shared/shared.module';
+
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
@@ -26,18 +31,22 @@ import {ThreadComponent} from './components/thread/thread.component';
     TestComponent,
     PostComponent,
     ReplyComponent,
-    NavbarComponent,
-    ThreadComponent,
+    MainpageThreadComponent,
   ],
   imports: [
     NgbModule,
-    NgSelectModule,
     FormsModule,
+    NgSelectModule,
     // CKEditorModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
+    CoreModule,
+    SharedModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

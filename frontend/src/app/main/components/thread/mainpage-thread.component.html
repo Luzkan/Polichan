@@ -1,0 +1,48 @@
+<div class="thread-mainpage" *ngIf="thread && posts">
+  <!--  <p (click)="select()">{{testVariable}}</p>-->
+
+  <div class="thread">
+    <div class="post-card card">
+      <div class="post-body card-body">
+        <div class="post-information">
+          <p>
+            <span class="post-nickname">Anonymous</span>
+            <span class="post-badge badge badge-danger ml-1">OP</span> |
+            <span class="post-date-time">14 minutes ago</span> |
+            <span class="post-id"><a href="#">1</a></span> |
+            <span class="post-collapse"><a href="#">[–]</a></span>
+          </p>
+        </div>
+        <div class="media mb-4">
+          <img class="post-image d-flex align-self-start rounded mr-3 avatar-sm img-fluid"
+               src="assets/images/obrazek1.jpg" alt="Jakiś Obrazaczek">
+          <div class="post-text media-body">
+            <p>
+              Właściciele gruntów, przez które przebiega szlak na Gubałówkę, zażądali jego zamknięcia. Okazuje się, że
+              alternatywna trasa również przebiega przez ich teren i trzeba im płacić za przejście. O powracającym
+              problemie szlaku na Gubałówkę pisze "Tygodnik Podhalański". Gazeta przypomina, że kilka lat temu został
+              zlikwidowany jeden szlak (biegnący wzdłuż torów kolejki na szczyt). Okazało się, że przebiegał przez
+              prywatne grunty. I ich właściciele w sezonie żądają od turystów opłaty za przejście. W tej sytuacji PTTK
+              zmieniło trasę szlaku.
+              <br/> <br/>
+              Okazało się, że nowa trasa również przebiega przez grunty tych samych właścicieli. Tym razem oni zwrócili
+              się do PTTK o zmianę szlaku. Organizacja turystyczna nie miała wielkiego wyjścia i tak właśnie zrobiła. W
+              efekcie na Gubałówkę nie prowadzi obecnie żaden szlak PTTK, a za jedyne istniejące przejście trzeba po
+              prostu zapłacić. "Tygodnik Podhalański" pisze, że nowe przejście na Gubałówkę ewentualnie może przebiegać
+              przez Walową Górę. Najpierw trzeba byłoby jednak wyremontować drogę gminną.
+            </p>
+          </div>
+        </div>
+        <div>
+          <p class="post-information-hidden">
+            <span id="posts-omitted-number">6</span> replies and
+            <span id="pictures-omitted-number">3</span> pictures omitted.
+            <span class="post-expand"><a href="#">[+]</a></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <app-post *ngFor="let post of posts" [post]="post"></app-post>
+  </div>
+</div>

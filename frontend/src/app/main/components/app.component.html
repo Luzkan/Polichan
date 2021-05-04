@@ -1,3 +1,11 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
+<ngx-spinner
+  [name]="spinnerName"
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+  <p class="spinner-label">Loading...</p>
+</ngx-spinner>

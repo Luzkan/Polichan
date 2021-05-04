@@ -23,6 +23,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "faker",
+              "lodash"
+            ],
             "outputPath": "dist/notice-board",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -56,8 +60,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "4mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -71,6 +75,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "proxyConfig": "src/environments/proxy/proxy.conf.json",
             "browserTarget": "notice-board:build"
           },
           "configurations": {

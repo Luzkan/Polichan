@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {PRIMARY_SPINNER_NAME} from '../../core/spinner/spinner-controller.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'notice-board';
+  spinnerName = PRIMARY_SPINNER_NAME;
 }

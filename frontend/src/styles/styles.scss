@@ -1,17 +1,18 @@
 @import '~bootstrap/scss/bootstrap';
 @import "~@ng-select/ng-select/themes/material.theme.css";
+@import "shared";
 
 body {
   margin: 0;
-  background: #1e1e1e; // $background-color
-  color: #cecece; // $primary-color
+  background: $background-color;
+  color: $primary-color;
   font-family: Roboto, Helvetica, sans-serif;
 }
 
 a {
-  color: #c62b2b; // $accent-color
+  color: $accent-color;
 }
 
 a:hover {
-  color: #ff5454; // $text-a-hover
+  color: $text-a-hover;
 }

@@ -1,18 +1,25 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ThreadService} from '../../services/thread.service';
+import {AbstractCleanable} from '../../../core/cleanable/abstract-cleanable.component';
+import {Thread} from '../../models/thread.model';
+import {Observable} from 'rxjs';
+import {Optional} from '../../../core/types/optional.model';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated,
 })
-export class HomeComponent implements OnInit {
-  constructor() { }
+export class HomeComponent extends AbstractCleanable implements OnInit {
+  threads: Optional<Observable<Thread[]>>;
 
-  ngOnInit(): void {
+  constructor(private readonly threadService: ThreadService) {
+    super();
   }
 
-  testList = ['1']
+  ngOnInit(): void {
+    this.threads = this.threadService.getThreads();
+  }
 
   selected(event: String) {
     console.log(event);

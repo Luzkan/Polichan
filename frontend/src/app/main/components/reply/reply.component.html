@@ -1,6 +1,6 @@
-<div class="container">
-<!--  <p (click)="select()">{{testVariable}}</p>-->
-  <div class="col-lg-8">
+<div class="row justify-content-center">
+  <!--  <p (click)="select()">{{testVariable}}</p>-->
+  <div class="col-12 col-md-9 col-lg-7">
     <div class="reply-form card">
       <div class="card-body">
         <div class="form-group row">
@@ -15,14 +15,12 @@
             <input class="form-control form-control-sm" type="text" value="" id="title-input">
           </div>
 
+          <!--          <div class="mb-3">-->
+          <!--            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>-->
+          <!--            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>-->
+          <!--          </div>-->
 
-
-<!--          <div class="mb-3">-->
-<!--            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>-->
-<!--            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>-->
-<!--          </div>-->
-
-<!--          <ckeditor [editor]="Editor" data="<p>Content of the editor.</p>"></ckeditor>-->
+          <!--          <ckeditor [editor]="Editor" data="<p>Content of the editor.</p>"></ckeditor>-->
 
           <label for="password-input" class="col-md-3 col-form-label">Password</label>
           <div class="col-md-9">
@@ -31,9 +29,9 @@
 
           <label for="text-body-input" class="col-md-3 col-form-label">Text</label>
           <div class="col-md-9">
-            <textarea class="form-control form-control-sm" type="text" value="" id="text-body-input" rows="4"></textarea>
+            <textarea class="form-control form-control-sm" type="text" value="" id="text-body-input" rows="4">
+            </textarea>
           </div>
-
         </div>
 
         <div class="custom-file">
@@ -48,4 +46,5 @@
         </div>
       </div>
     </div>
+  </div>
 </div>
