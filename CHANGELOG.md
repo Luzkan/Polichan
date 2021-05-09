@@ -4,7 +4,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - 2021-05-01
+## [[0.4.0]] - 2021-05-09
+### Added
+- Feature: Toggle visibility of a Thread on main page via `[-]` button.
+- Feature: Displaying only last three posts linked to a given thread and `[+]` expanding button that shows all posts after clicking.
+- Styling: Adjusted styling for posts in a thread on main page
+- List of title headings corresponding to a given board & title placement under the navbar with the purpose of informing user on which board he currently is
+### In-Progress
+- Feature: Label Generator _(still needs some work)_
+### Changed
+- Styling: Default post border colour matching the background colour (so it's not visible)
+### Planned
+- Added example content printing after minimising a thread.
+- To-do's for `post-information` in `/mainpage-thread/` component HTML file:
+    - Link variable with number of posts in a thread that are omitted
+    - Link variable with number of posts with pictures in thread that are omitted
+    - Decide whether loading & hiding (current implementation) or load on demand _(on click)_ should be implemented on toggleShowPostsInThread button.
+### Miscellaneous
+- Tagged Version [0.3.0] and [0.2.0].
+
+<img src="./docs/img/polichan_homepage_v0_4_0.gif" width="900"/>
+
+## [[0.3.0]] - 2021-05-04
+
+## [[0.2.0]] - 2021-05-03
+
+## [[0.1.0]] - 2021-05-01
 ### Added
 - This [`CHANGELOG.md`](./CHANGELOG.md) file.
 - Created navigation bar and inserted it into `Header` component
@@ -17,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - All the components can be viewed individually under their respective href names
 - Inserted the components to homepage view. They will be more or less look somewhat like that at the end
 
-<img src="./docs/img/v0-1-0.png" width="750"/>
+<img src="./docs/img/polichan_homepage_v0_1_0.png" width="900"/>
 
 ### Fixed
 - Linter Warnings
@@ -37,7 +62,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `README.md`
 
 
-
+[0.4.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.4.0
+[0.3.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.3.0
+[0.2.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.2.0
 [0.1.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.1.0
 [0.0.2]: https://github.com/Luzkan/Polichan/releases/tag/v0.0.2
 [0.0.1]: https://github.com/Luzkan/Polichan/releases/tag/v0.0.1
