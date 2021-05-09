@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   boardThematicList = ['it/', 'math/', 'med/', 'bio/', 'chem/', 'phys/', 'elec/', 'bud/', 'arch/', 'mech/']
 
   selected(event: String) {
+    // let test = BOARD_TITLES.get(event)
     console.log(event);
   }
 }

@@ -5,10 +5,16 @@
   <!--    <app-test *ngFor="let item of testList" (testOutput)="selected($event)" [testVariable]="item"></app-test>-->
   <!--    <app-test *ngFor="let item of testList" (testOutput)="selected(item)" [testVariable]="item"></app-test>-->
 
+
+  <div class="row justify-content-center boardname">
+<!--    <h3>{{ title }}</h3>-->
+    <h3>/it/ - Informatyka & Programowanie</h3>
+  </div>
+
   <app-reply></app-reply>
 
 
-  <div calss="thread-list" *ngIf="threads.length > 0">
+  <div class="thread-list" *ngIf="threads.length > 0">
     <app-thread *ngFor="let thread of threads" [thread]="thread"></app-thread>
   </div>
 

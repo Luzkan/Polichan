@@ -13,15 +13,28 @@ import {Optional} from '../../../core/types/optional.model';
 export class HomeComponent extends AbstractCleanable implements OnInit {
   threads: Optional<Observable<Thread[]>>;
 
+  static BOARD_TITLES = {
+    '*': '',
+    'poli': '/poli/ - Politechnika',
+    'uni': '/uni/ - Uniwersytet',
+    'random': '/random/ - Tematy Przeróżne',
+    'it': '/it/ - Programowanie i Informatyka',
+    'math': '/math/ - Matematyka i Cyferki',
+    'med': '/med/ - Medycyna i Lekarskie',
+    'bio': '/bio/ - Biologia i Natura',
+    'chem': '/chem/ - Chemia i Mieszadełka',
+    'phys': '/phys/ - Fizyka i Astronomia',
+    'elec': '/elec/ - Elektryka i Elektronika',
+    'bud': '/bud/ - Budowa',
+    'arch': '/arch/ - Architektura',
+    'mech': '/mech/ - Mechanika',
+  }
+
   constructor(private readonly threadService: ThreadService) {
     super();
   }
 
   ngOnInit(): void {
     this.threads = this.threadService.getThreads();
-  }
-
-  selected(event: String) {
-    console.log(event);
   }
 }

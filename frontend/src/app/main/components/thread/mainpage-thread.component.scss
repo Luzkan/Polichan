@@ -33,6 +33,7 @@
 
 .post-information-hidden {
   color: $muted-color;
+  margin-bottom: 0px;
 }
 
 .post-expand{
@@ -41,4 +42,14 @@
 
 .thread-mainpage {
   margin-bottom: calc(0.375rem + 15px);
+}
+
+.post-infomration-content {
+  margin-bottom: 0px;
+}
+
+.posts-in-thread {
+  // Small left padding for indentation posts in a thread (easier to distinct)
+  padding-left: 1.5%;
+  padding-right: 3%;
 }

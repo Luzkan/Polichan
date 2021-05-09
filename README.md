@@ -1,5 +1,5 @@
 <p align="center">
-  <h2 align="center">Notice Board</h2>
+  <h2 align="center">Polichan</h2>
   <h3 align="center"><i>Design & Implementation of Web Systems (Project)</i></h3>
 </p>
 
@@ -36,9 +36,11 @@
 
 Some of the planned features:
 
-* Browsing Cards
-* Sorting & Filtering
-* Categories
+* Threads
+* Posts
+* Reply System
+* Boards
+* Attaching Pictures
 
 ## Usage
 

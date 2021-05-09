@@ -1,8 +1,7 @@
 <div class="thread-mainpage" *ngIf="thread && posts">
-  <!--  <p (click)="select()">{{testVariable}}</p>-->
-
+  <!-- Default Visibility -->
   <div class="thread">
-    <div class="post-card card">
+    <div class="post-card card" *ngIf="threadIsShown">
       <div class="post-body card-body">
         <div class="post-information">
           <p>
@@ -10,12 +9,12 @@
             <span class="post-badge badge badge-danger ml-1">OP</span> |
             <span class="post-date-time">14 minutes ago</span> |
             <span class="post-id"><a href="#">1</a></span> |
-            <span class="post-collapse"><a href="#">[–]</a></span>
+            <span class="post-collapse" (click)="toggleShowThread()"><a href="#">[–]</a></span>
           </p>
         </div>
-        <div class="media mb-4">
+        <div class="media mb-4 hidden">
           <img class="post-image d-flex align-self-start rounded mr-3 avatar-sm img-fluid"
-               src="assets/images/obrazek1.jpg" alt="Jakiś Obrazaczek">
+               src="assets/images/obrazek1.jpg" alt="Jakiś Obrazeczek">
           <div class="post-text media-body">
             <p>
               Właściciele gruntów, przez które przebiega szlak na Gubałówkę, zażądali jego zamknięcia. Okazuje się, że
@@ -34,15 +33,44 @@
           </div>
         </div>
         <div>
-          <p class="post-information-hidden">
+          <p class="post-information-hidden" *ngIf="!postsInThreadAreShown">
+            <!-- TODO: This should tell the numbers of posts in thread. -->
             <span id="posts-omitted-number">6</span> replies and
+            <!-- TODO: This should tell the numbers of posts in thread with pictures. -->
             <span id="pictures-omitted-number">3</span> pictures omitted.
-            <span class="post-expand"><a href="#">[+]</a></span>
+            <!-- TODO: This should load in all the posts linked to given thread after click. -->
+            <span class="post-expand" (click)="toggleShowPostsInThread()"><a href="#">[+]</a></span>
           </p>
         </div>
       </div>
+      <div class="posts-in-thread" *ngIf="postsInThreadAreShown" >
+        <app-post *ngFor="let post of posts" [post]="post"></app-post>
+      </div>
+      <!-- Displaying last 3 posts in a given thread. -->
+      <div class="posts-in-thread" *ngIf="!postsInThreadAreShown">
+        <app-post *ngFor="let post of (posts | slice:posts.length - 4)" [post]="post"></app-post>
+      </div>
     </div>
+  </div>
 
-    <app-post *ngFor="let post of posts" [post]="post"></app-post>
+  <!-- After Hiding a Thread -->
+  <div class="post-card card" *ngIf="!threadIsShown">
+    <div class="post-body card-body">
+      <div class="post-information">
+        <p style="margin-bottom: 0;">
+          <span class="post-nickname">Anonymous</span>
+          <span class="post-badge badge badge-danger ml-1">OP</span> |
+          <span class="post-date-time">14 minutes ago</span> |
+          <span class="post-id"><a href="#">1</a></span> |
+          <span class="post-collapse" (click)="toggleShowThread()"><a href="#">[–]</a></span>
+          <script>
+            <!-- TODO: Example Content Printing when thread is hidden -->
+            let postContent = 'Właściciele gruntów, przez które przebiega szlak na Gubałówkę, zażądali jego'
+            let postContentAfterHiding = ` | ${postContent.substring(0, 50)}...`;
+          </script>
+          <span class="post-hidden-preview-content"> | Właściciele gruntów, przez które przebiega szlak na Gubałówkę...</span>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
