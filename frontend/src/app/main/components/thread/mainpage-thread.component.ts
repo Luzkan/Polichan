@@ -25,7 +25,9 @@ export class MainpageThreadComponent extends AbstractCleanable implements OnChan
   posts: Optional<Post[]>;
 
   threadIsShown: boolean = true;
-  toggleShowThread() { this.threadIsShown = !this.threadIsShown; }
+  toggleShowThread() {
+    this.threadIsShown = !this.threadIsShown;
+  }
 
   postsInThreadAreShown: boolean = false;
   toggleShowPostsInThread() {
