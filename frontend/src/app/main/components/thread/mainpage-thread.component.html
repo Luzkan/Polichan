@@ -33,14 +33,23 @@
           </div>
         </div>
         <div>
-          <p class="post-information-hidden">
+          <p class="post-information-hidden" *ngIf="!postsInThreadAreShown">
+            <!-- TODO: This should tell the numbers of posts in thread. -->
             <span id="posts-omitted-number">6</span> replies and
+            <!-- TODO: This should tell the numbers of posts in thread with pictures. -->
             <span id="pictures-omitted-number">3</span> pictures omitted.
-            <span class="post-expand"><a href="#">[+]</a></span>
+            <!-- TODO: This should load in all the posts linked to given thread after click. -->
+            <span class="post-expand" (click)="toggleShowPostsInThread()"><a href="#">[+]</a></span>
           </p>
         </div>
       </div>
-      <app-post *ngFor="let post of posts" [post]="post"></app-post>
+      <div class="posts-in-thread" *ngIf="postsInThreadAreShown" >
+        <app-post *ngFor="let post of posts" [post]="post"></app-post>
+      </div>
+      <!-- Displaying last 3 posts in a given thread. -->
+      <div class="posts-in-thread" *ngIf="!postsInThreadAreShown">
+        <app-post *ngFor="let post of (posts | slice:posts.length - 4)" [post]="post"></app-post>
+      </div>
     </div>
   </div>
 
@@ -55,7 +64,7 @@
           <span class="post-id"><a href="#">1</a></span> |
           <span class="post-collapse" (click)="toggleShowThread()"><a href="#">[–]</a></span>
           <script>
-            <!-- TODO: Rozwiążmy podgląd mniej więcej w taki sposób. -->
+            <!-- TODO: Example Content Printing when thread is hidden -->
             let postContent = 'Właściciele gruntów, przez które przebiega szlak na Gubałówkę, zażądali jego'
             let postContentAfterHiding = ` | ${postContent.substring(0, 50)}...`;
           </script>

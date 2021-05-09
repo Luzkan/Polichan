@@ -27,6 +27,12 @@ export class MainpageThreadComponent extends AbstractCleanable implements OnChan
   threadIsShown: boolean = true;
   toggleShowThread() { this.threadIsShown = !this.threadIsShown; }
 
+  postsInThreadAreShown: boolean = false;
+  toggleShowPostsInThread() {
+    this.postsInThreadAreShown = !this.postsInThreadAreShown;
+    // if (this.postsInThreadAreShown) { element.text = '[-]' } else { element = '[+]' }
+  }
+
   constructor(private readonly changeDetector: ChangeDetectorRef,
               private readonly postService: PostService) {
     super();
