@@ -48,7 +48,7 @@
       </div>
       <!-- Displaying last 3 posts in a given thread. -->
       <div class="posts-in-thread" *ngIf="!postsInThreadAreShown">
-        <app-post *ngFor="let post of (posts | slice:posts.length - 4)" [post]="post"></app-post>
+        <app-post *ngFor="let post of (posts | slice:0: 3)" [post]="post"></app-post>
       </div>
     </div>
   </div>

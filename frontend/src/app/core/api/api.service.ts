@@ -1,21 +1,21 @@
 import {Injectable} from '@angular/core';
 import {Dictionary} from '../types/dictionary.model';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {appConfig} from '../../../environments/app-config';
-import {MockedDataWrapper} from '../mock-api/mocked-data-wrapper.model';
-import {map} from 'rxjs/operators';
+import {InMemoryDataService} from '../mock-api/in-memory-data.service';
+import {UrlService} from '../config/url.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  static IN_MEMORY_ROOT_PATH = 'config';
-
-  constructor(private readonly httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient,
+              private readonly urlService: UrlService,
+              private readonly inMemoryDataService: InMemoryDataService) {
   }
 
-  get<T>(urlPattern: string,
+  get<T>(patternKey: string,
       pathParams: Dictionary<string> = {},
       queryParams: Dictionary<string> = {},
       headers: Dictionary<string> = {}): Observable<T> {
@@ -24,26 +24,10 @@ export class ApiService {
       params: queryParams,
       reportProgress: false,
     };
-
+    const url = this.urlService.prepareUrlForKey(patternKey, pathParams);
     if (appConfig.inMemoryApiEnabled) {
-      const url = ApiService.prepareMockerApiUrl(urlPattern, pathParams);
-      const fakeApiUrl = `api/${ApiService.IN_MEMORY_ROOT_PATH}/${url}`;
-      return this.httpClient.get<MockedDataWrapper<T>>(fakeApiUrl, options)
-          .pipe(map((wrapper) => wrapper.data));
+      return of(this.inMemoryDataService.get<T>(url, options));
     }
-    const url = ApiService.prepareUrl(urlPattern, pathParams);
     return this.httpClient.get<T>(url, options);
-  }
-
-  static prepareUrl(pattern: string, params: Dictionary<string>): string {
-    return Object.entries(params).reduce((pattern, [key, value]) => {
-      return pattern.replace(`{${key}}`, value);
-    }, pattern);
-  }
-
-  static prepareMockerApiUrl(pattern: string, params: Dictionary<string> = {}): string {
-    return Object.entries(params).reduce((pattern, [key, value]) => {
-      return pattern.replace(`{${key}}`, value);
-    }, pattern).slice(1).split('/').join('--');
   }
 }

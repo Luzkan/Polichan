@@ -1,56 +1,61 @@
 import {Injectable} from '@angular/core';
-import {InMemoryDbService} from 'angular-in-memory-web-api';
 import {Thread} from '../../main/models/thread.model';
 import {Post} from '../../main/models/post.model';
-import {groupBy} from 'lodash-es';
+import {groupBy, isNil} from 'lodash-es';
 import * as faker from 'faker';
-import {MockedDataWrapper} from './mocked-data-wrapper.model';
 import {Dictionary} from '../types/dictionary.model';
-import {ThreadService} from '../../main/services/thread.service';
-import {ApiService} from '../api/api.service';
-import {PostService} from '../../main/services/post.service';
 import {ThreadCategory} from '../../main/models/thread-category.model';
+import {isNotNil} from '../operators/is-not-nill';
+import {UrlService} from '../config/url.service';
+import {ApiPatternKey} from '../api/api-pattern-key.model';
 
+type Predicate<I> = (value: I) => boolean
+type PipeReducer<I, O> = (data: I, params: Dictionary<string>) => I | O
+type DataReducer<I, O> = (param: string, input: I) => O
+type IdGenerator = { next: () => string };
+type Options = { params: Dictionary<string>, headers: Dictionary<string> };
 
 @Injectable({
   providedIn: 'root',
 })
-export class InMemoryDataService implements InMemoryDbService {
-  createDb(): {} {
-    const db: Dictionary<MockedDataWrapper<any>[]> = {};
-    const threadIdGen = this.createNumberGenerator();
-    const postIdGen = this.createNumberGenerator();
+export class InMemoryDataService {
+  private database: Dictionary<any> = {};
+  private paramReducer: PipeReducer<any, any>;
+  private headerReducer: PipeReducer<any, any>;
+
+  constructor(private readonly urlService: UrlService) {
+    this.initDB();
+    this.paramReducer = this.createParamReducer();
+    this.headerReducer = this.createHeaderReducer();
+  }
+
+  initDB(): void {
+    const threadIdGen = this.createIdGenerator();
+    const postIdGen = this.createIdGenerator();
 
     const threads = this.createThreads(4, threadIdGen);
-    this.addPathData(db, ApiService.prepareMockerApiUrl(ThreadService.THREADS_URL), threads);
+    this.setPathData(this.prepareUrl(ApiPatternKey.THREADS), threads);
 
     threads.forEach((thread) => {
-      this.addPathData(db, ApiService.prepareMockerApiUrl(ThreadService.THREAD_URL, {id: thread.id}), thread);
-    });
-
-    const threadByCategory = groupBy(threads, (thread) => thread.category);
-    Object.entries(threadByCategory).forEach(([category, threads]) => {
-      const url = `${ApiService.prepareMockerApiUrl(ThreadService.THREADS_URL)}?category=${category}`;
-      this.addPathData(db, url, threads);
+      this.setPathData(this.prepareUrl(ApiPatternKey.THREAD, {id: thread.id}), thread);
     });
 
     const posts = this.createPosts(2, threads, postIdGen);
     posts.forEach((post) => {
-      this.addPathData(db, ApiService.prepareMockerApiUrl(PostService.POST_URL, {id: post.id}), post);
+      this.setPathData(this.prepareUrl(ApiPatternKey.POST, {id: post.id}), post);
     });
 
     const postsByThreadId = groupBy(posts, (post) => post.threadId);
     Object.entries(postsByThreadId).forEach(([threadId, posts]) => {
-      this.addPathData(db, ApiService.prepareMockerApiUrl(PostService.POSTS_URL, {id: threadId}), posts);
+      this.setPathData(this.prepareUrl(ApiPatternKey.THREAD_POSTS, {id: threadId}), posts);
     });
-    return db;
   }
 
-  private createThreads(n: number, idGen: { next: () => string }): Thread[] {
+  private createThreads(n: number, idGen: IdGenerator): Thread[] {
     return Array(n).fill(0).map(() => this.createFakeThread(idGen.next()));
   }
 
-  private createPosts(n: number, threads: Thread[], idGen: { next: () => string }): Post[] {
+  private createPosts(n: number, threads: Thread[], idGen: IdGenerator): Post[] {
     return threads.map((thread) => (Array(n).fill(0).map(() => this.createFakePost(idGen.next(), thread.id))))
         .reduce((flat, next) => flat.concat(next), []);
   }
@@ -75,7 +80,7 @@ export class InMemoryDataService implements InMemoryDbService {
     };
   }
 
-  private createNumberGenerator(): { next: () => string } {
+  private createIdGenerator(): IdGenerator {
     let i = 0;
     return {
       next: () => {
@@ -85,9 +90,63 @@ export class InMemoryDataService implements InMemoryDbService {
     };
   }
 
-  private addPathData<T>(db: Dictionary<MockedDataWrapper<any>[]>, path: string, data: T): void {
-    const state: MockedDataWrapper<any>[] = db[ApiService.IN_MEMORY_ROOT_PATH] ?? [];
-    state.push({id: path, data});
-    db[ApiService.IN_MEMORY_ROOT_PATH] = state;
+  private setPathData<T>(path: string, data: T): void {
+    this.database[path] = data;
+  }
+
+  public get<T>(path: string, options: Options): T {
+    console.log(path, options);
+    const data = this.database[path];
+    return this.handleOptions(data, options);
+  }
+
+  private handleOptions<T>(data: any, options: Options): T {
+    const dataAfterHeader = this.handleHeaders<T>(data, options.headers);
+    const dataAfterParams = this.handleParams<T>(dataAfterHeader, options.params);
+    return dataAfterParams;
+  }
+
+  private handleHeaders<T>(data: any, headers: Dictionary<string>): T {
+    return this.headerReducer(data, headers);
+  }
+
+  private handleParams<T>(data: any, queryParams: Dictionary<string>): T {
+    return this.paramReducer(data, queryParams);
+  }
+
+  private createHeaderReducer(): PipeReducer<any, any> {
+    return this.reducerPipe();
+  }
+
+  private createParamReducer(): PipeReducer<any, any> {
+    const arrayPredicate = <I>(data: I) => Array.isArray(data);
+    const categoryPredicate = <I>(data: I) => Array.isArray(data) && data.every((e) => isNotNil(e.category));
+
+    const offsetReducer = <T>(offset: string, data: T[]) => data.slice(Number(offset));
+    const limitReducer = <T>(limit: string, data: T[]) => data.slice(0, Number(limit));
+    const categoryReducer = (category: string, data: Thread[]) => data.filter((e) => e.category == category);
+
+    return this.reducerPipe(
+        this.safeReducer(categoryReducer, 'category', categoryPredicate),
+        this.safeReducer(offsetReducer, 'offset', arrayPredicate),
+        this.safeReducer(limitReducer, 'limit', arrayPredicate),
+    );
+  }
+
+  private safeReducer<I, O>(func: DataReducer<I, O>, paramKey: string, predicate?: Predicate<I>): PipeReducer<I, O> {
+    return (data: I, params: Dictionary<string>) => {
+      const param = params[paramKey];
+      const predicatePass = isNil(predicate) ? true : predicate(data);
+      return isNotNil(param) && predicatePass ? func(param, data): data;
+    };
+  }
+
+  // @ts-ignore
+  private reducerPipe<I, O>(...functions: PipeReducer[]): PipeReducer<I, O> {
+    return (initialVal: I, dict: Dictionary<string>) => (functions.reduce((g, f) => f(g, dict), initialVal) as O);
+  }
+
+  private prepareUrl(patternKey: string, pathParams: Dictionary<string> = {}): string {
+    return this.urlService.prepareUrlForKey(patternKey, pathParams);
   }
 }
