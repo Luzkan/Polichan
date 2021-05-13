@@ -5,6 +5,7 @@ import {Thread} from '../../models/thread.model';
 import {Observable} from 'rxjs';
 import {Optional} from '../../../core/types/optional.model';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
