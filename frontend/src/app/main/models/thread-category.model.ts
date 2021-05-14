@@ -1,5 +1,4 @@
 export enum ThreadCategory {
-  POLI = 'POLI',
   IT = 'IT',
   MATH = 'MATH',
   MED = 'MED',

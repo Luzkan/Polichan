@@ -1,21 +1,62 @@
 import {Component, OnInit} from '@angular/core';
+import {RouteCategoryId} from '../../navigation/route-category-id.model';
+import {ActivatedRoute} from '@angular/router';
+import {AbstractCleanable} from '../../../core/cleanable/abstract-cleanable.component';
+
+interface NavbarData {
+  translationKey: string,
+  routerLink: string
+}
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-  constructor() { }
+export class HeaderComponent extends AbstractCleanable implements OnInit {
+  links: NavbarData[] = [];
 
-  ngOnInit(): void {
+  constructor(private readonly activatedRoute: ActivatedRoute) {
+    super();
   }
 
-  boardMainList = ['poli/', 'random/']
-  boardThematicList = ['it/', 'math/', 'med/', 'bio/', 'chem/', 'phys/', 'elec/', 'bud/', 'arch/', 'mech/']
+  ngOnInit(): void {
+    this.initLinks();
+    this.addSubscription(
+        this.activatedRoute.url.subscribe((url) => console.log(url)),
+    );
+  }
 
-  selected(event: String) {
-    // let test = BOARD_TITLES.get(event)
-    console.log(event);
+
+  private initLinks(): void {
+    const routeCategoryIds = Object.values(RouteCategoryId);
+    const categoryLinks = this.prepareCategoryLinks(routeCategoryIds);
+    const customLinks = this.prepareCustomLinks();
+    this.links = [...customLinks, ...categoryLinks];
+  }
+
+  private prepareCategoryLinks(routeCategoryIds: string[]) {
+    return routeCategoryIds.map((id) => this.createNavbarDataForId(id));
+  }
+
+  private prepareCustomLinks() {
+    return [
+      {
+        translationKey: 'Header.Navbar.Item.Poli',
+        routerLink: '/main',
+      },
+      {
+        translationKey: 'Header.Navbar.Item.Random',
+        routerLink: '/random',
+      },
+    ];
+  }
+
+  private createNavbarDataForId(id: string): NavbarData {
+    const key = id.charAt(0).toUpperCase() + id.slice(1).toLowerCase();
+    return {
+      routerLink: `/category/${id}`,
+      translationKey: `Header.Navbar.Item.${key}`,
+    };
   }
 }
