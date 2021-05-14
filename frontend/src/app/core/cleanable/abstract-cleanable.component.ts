@@ -2,6 +2,8 @@ import {Subscription} from 'rxjs';
 import {Directive, OnDestroy} from '@angular/core';
 import {Dictionary} from '../types/dictionary.model';
 import {v4 as uuid} from 'uuid';
+import {Optional} from '../types/optional.model';
+import {isNil} from 'lodash-es';
 
 @Directive()
 // tslint:disable-next-line:directive-class-suffix
@@ -23,5 +25,12 @@ export abstract class AbstractCleanable implements OnDestroy {
     if (subscription && !subscription.closed) {
       subscription.unsubscribe();
     }
+  }
+
+  protected safeGetter<T>(value: Optional<T>, name: string): T {
+    if (isNil(value)) {
+      throw new Error(`Value for ${name} is not defined`);
+    }
+    return value;
   }
 }

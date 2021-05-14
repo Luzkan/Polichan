@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [[0.5.0]] - 2021-05-09
+### Added
+- Feature: Internationalization - Configuration & propagation
+- Feature: Own implementation of InMemoryApi for development and tests
+- Feature: InMemoryApi now handle POST requests
+- Feature: New routes: main, random, posts and for categories with categoryId resolver 
+- Feature: Added view logic for Navbar
+- Feature: Pagination of Threads
+- Feature: Main, Random, Category components
+- Feature: Board component view logic implementation
+- Feature: Initialized ReactiveForms in project
+- Feature: Separate component for thread details initialized
+
+
 ## [[0.4.0]] - 2021-05-09
 ### Added
 - Feature: Toggle visibility of a Thread on main page via `[-]` button.

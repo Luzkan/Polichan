@@ -14,7 +14,6 @@ export class CategoryResolver implements Resolve<ThreadCategory> {
   resolve(route: ActivatedRouteSnapshot): ThreadCategory {
     const id = route.params.id;
     const categoryId = threadCategoryByRouteId[id];
-    console.log('Route changed');
     if (isNil(categoryId)) {
       this.router.navigate(['']);
     }

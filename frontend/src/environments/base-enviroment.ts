@@ -13,8 +13,8 @@ export const baseEnvironment = {
     patterns: {
       [ApiPatternKey.THREAD]: '/threads/{id}',
       [ApiPatternKey.THREADS]: '/threads',
+      [ApiPatternKey.POSTS]: '/posts',
       [ApiPatternKey.THREAD_POSTS]: '/thread/{id}/posts',
-      [ApiPatternKey.POST]: '/posts/{id}',
     } as Dictionary<string>,
   },
 };

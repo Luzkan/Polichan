@@ -3,55 +3,63 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnChanges,
+  OnInit,
 } from '@angular/core';
+import {AbstractCleanable} from '../../../core/cleanable/abstract-cleanable.component';
 import {Optional} from '../../../core/types/optional.model';
 import {Thread} from '../../models/thread.model';
 import {Post} from '../../models/post.model';
 import {PostService} from '../../services/post.service';
-import {AbstractCleanable} from '../../../core/cleanable/abstract-cleanable.component';
+import {Pageable} from '../../../core/api/pageable.model';
 
 @Component({
   selector: 'app-thread',
-  templateUrl: './mainpage-thread.component.html',
-  styleUrls: ['./mainpage-thread.component.scss'],
+  templateUrl: './thread.component.html',
+  styleUrls: ['./thread.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
-export class MainpageThreadComponent extends AbstractCleanable implements OnChanges {
+export class ThreadComponent extends AbstractCleanable implements OnInit {
   @Input()
   thread: Optional<Thread>;
 
   posts: Optional<Post[]>;
 
   threadIsShown: boolean = true;
-  toggleShowThread() {
-    this.threadIsShown = !this.threadIsShown;
-  }
 
   postsInThreadAreShown: boolean = false;
-  toggleShowPostsInThread() {
-    this.postsInThreadAreShown = !this.postsInThreadAreShown;
-    // if (this.postsInThreadAreShown) { element.text = '[-]' } else { element = '[+]' }
-  }
+
+  private readonly pageable = Pageable.forLimit(3);
 
   constructor(private readonly changeDetector: ChangeDetectorRef,
               private readonly postService: PostService) {
     super();
   }
 
-  ngOnChanges(): void {
-    const thread = this.thread;
-    if (!thread) {
-      return;
-    }
+  toggleShowThread() {
+    this.threadIsShown = !this.threadIsShown;
+  }
+
+  toggleShowPostsInThread() {
+    this.postsInThreadAreShown = !this.postsInThreadAreShown;
+    // if (this.postsInThreadAreShown) { element.text = '[-]' } else { element = '[+]' }
+  }
+
+  ngOnInit(): void {
+    this.loadPostsForThread(this.getThread());
+  }
+
+  private loadPostsForThread(thread: Thread):void {
     this.addSubscription(
-        this.postService.getPosts(thread.id, 3)
+        this.postService.getPosts(thread.id, this.pageable)
             .subscribe((posts) => {
               this.posts = posts;
               this.changeDetector.markForCheck();
             }),
-        'POSTS',
+        'loadPostsForThread',
     );
+  }
+
+  private getThread(): Thread {
+    return this.safeGetter(this.thread, 'thread');
   }
 }

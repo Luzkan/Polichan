@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteCategoryId} from '../../navigation/route-category-id.model';
-import {ActivatedRoute} from '@angular/router';
 import {AbstractCleanable} from '../../../core/cleanable/abstract-cleanable.component';
 
 interface NavbarData {
@@ -16,15 +15,8 @@ interface NavbarData {
 export class HeaderComponent extends AbstractCleanable implements OnInit {
   links: NavbarData[] = [];
 
-  constructor(private readonly activatedRoute: ActivatedRoute) {
-    super();
-  }
-
   ngOnInit(): void {
     this.initLinks();
-    this.addSubscription(
-        this.activatedRoute.url.subscribe((url) => console.log(url)),
-    );
   }
 
 

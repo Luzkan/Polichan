@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Thread} from '../../main/models/thread.model';
 import {Post} from '../../main/models/post.model';
-import {groupBy, isNil} from 'lodash-es';
+import {flatMap, isNil} from 'lodash-es';
 import * as faker from 'faker';
 import {Dictionary} from '../types/dictionary.model';
 import {ThreadCategory} from '../../main/models/thread-category.model';
-import {isNotNil} from '../operators/is-not-nill';
 import {UrlService} from '../config/url.service';
 import {ApiPatternKey} from '../api/api-pattern-key.model';
 
@@ -20,8 +19,10 @@ type Options = { params: Dictionary<string>, headers: Dictionary<string> };
 })
 export class InMemoryDataService {
   private database: Dictionary<any> = {};
-  private paramReducer: PipeReducer<any, any>;
-  private headerReducer: PipeReducer<any, any>;
+  private readonly paramReducer: PipeReducer<any, any>;
+  private readonly headerReducer: PipeReducer<any, any>;
+  private threadIdGen = InMemoryDataService.createIdGenerator();
+  private postIdGen = InMemoryDataService.createIdGenerator();
 
   constructor(private readonly urlService: UrlService) {
     this.initDB();
@@ -30,48 +31,29 @@ export class InMemoryDataService {
   }
 
   initDB(): void {
-    const threadIdGen = this.createIdGenerator();
-    const postIdGen = this.createIdGenerator();
-
-    const threads = this.createThreads(4, threadIdGen);
-    this.setPathData(this.prepareUrl(ApiPatternKey.THREADS), threads);
-
-    threads.forEach((thread) => {
-      this.setPathData(this.prepareUrl(ApiPatternKey.THREAD, {id: thread.id}), thread);
-    });
-
-    const posts = this.createPosts(2, threads, postIdGen);
-    posts.forEach((post) => {
-      this.setPathData(this.prepareUrl(ApiPatternKey.POST, {id: post.id}), post);
-    });
-
-    const postsByThreadId = groupBy(posts, (post) => post.threadId);
-    Object.entries(postsByThreadId).forEach(([threadId, posts]) => {
-      this.setPathData(this.prepareUrl(ApiPatternKey.THREAD_POSTS, {id: threadId}), posts);
-    });
+    const threads = this.createThreads(10).map((thread) => this.saveThread(thread));
+    this.createPosts(5, threads).map((post) => this.savePost(post));
   }
 
-  private createThreads(n: number, idGen: IdGenerator): Thread[] {
-    return Array(n).fill(0).map(() => this.createFakeThread(idGen.next()));
+  private createThreads(n: number): Thread[] {
+    return Array(n).fill(0).map(() => this.createFakeThread());
   }
 
-  private createPosts(n: number, threads: Thread[], idGen: IdGenerator): Post[] {
-    return threads.map((thread) => (Array(n).fill(0).map(() => this.createFakePost(idGen.next(), thread.id))))
-        .reduce((flat, next) => flat.concat(next), []);
+  private createPosts(n: number, threads: Thread[]): Post[] {
+    return flatMap(threads.map((thread) => (Array(n).fill(0).map(() => this.createFakePost(thread.id)))));
   }
 
-  private createFakeThread(id: string): Thread {
+  private createFakeThread(): any {
     return {
-      id: id,
+      topic: faker.lorem.words(4),
       nickname: faker.name.firstName(),
       date: faker.date.past(2),
       category: faker.random.arrayElement(Object.values(ThreadCategory)),
     };
   }
 
-  private createFakePost(id: string, threadId: string): Post {
+  private createFakePost(threadId: string): any {
     return {
-      id: id,
       threadId: threadId,
       nickname: faker.name.firstName(),
       content: faker.lorem.lines(8),
@@ -80,7 +62,7 @@ export class InMemoryDataService {
     };
   }
 
-  private createIdGenerator(): IdGenerator {
+  private static createIdGenerator(): IdGenerator {
     let i = 0;
     return {
       next: () => {
@@ -90,19 +72,71 @@ export class InMemoryDataService {
     };
   }
 
+  private savePost(post: any): Post {
+    post.id = this.postIdGen.next();
+
+    const postsPath = this.prepareUrl(ApiPatternKey.POSTS);
+    this.saveInArray(postsPath, post);
+
+    const threadPostsPath = this.prepareUrl(ApiPatternKey.THREAD_POSTS, {id: post.threadId});
+    this.saveInArray(threadPostsPath, post);
+    return post;
+  }
+
+  private saveThread(thread: any): Thread {
+    thread.id = this.threadIdGen.next();
+
+    const path = this.prepareUrl(ApiPatternKey.THREADS);
+    this.saveInArray(path, thread);
+
+    const detailsPath = this.prepareUrl(ApiPatternKey.THREAD, {id: thread.id});
+    this.setPathData(detailsPath, thread);
+
+    const threadPostsPath = this.prepareUrl(ApiPatternKey.THREAD_POSTS, {id: thread.id});
+    this.setPathData(threadPostsPath, []);
+
+    return thread;
+  }
+
+  private saveInArray<T>(path: string, value: T): void {
+    const data = this.database[path] ?? [];
+    if (!Array.isArray(data)) {
+      throw new Error('Path is bussy and is not array');
+    }
+    this.database[path] = data.concat(value);
+  }
+
   private setPathData<T>(path: string, data: T): void {
     this.database[path] = data;
   }
 
+  post(path: string, payload: any): any {
+    const threadsPath = this.prepareUrl(ApiPatternKey.THREADS);
+    const postsPath = this.prepareUrl(ApiPatternKey.THREADS);
+    console.log('--------------------------');
+    console.log('POST', path);
+    switch (path) {
+      case threadsPath:
+        return this.saveThread(payload);
+      case postsPath:
+        return this.savePost(payload);
+      default:
+        throw new Error('POST path not handled');
+    }
+  }
+
   public get<T>(path: string, options: Options): T {
     const data = this.database[path];
-    return this.handleOptions(data, options);
+    console.log('--------------------------');
+    console.log('GET', path, data);
+    const outData = this.handleOptions<T>(data, options);
+    console.log(options, outData);
+    return outData;
   }
 
   private handleOptions<T>(data: any, options: Options): T {
     const dataAfterHeader = this.handleHeaders<T>(data, options.headers);
-    const dataAfterParams = this.handleParams<T>(dataAfterHeader, options.params);
-    return dataAfterParams;
+    return this.handleParams<T>(dataAfterHeader, options.params);
   }
 
   private handleHeaders<T>(data: any, headers: Dictionary<string>): T {
@@ -119,7 +153,7 @@ export class InMemoryDataService {
 
   private createParamReducer(): PipeReducer<any, any> {
     const arrayPredicate = <I>(data: I) => Array.isArray(data);
-    const categoryPredicate = <I>(data: I) => Array.isArray(data) && data.every((e) => isNotNil(e.category));
+    const categoryPredicate = <I>(data: I) => Array.isArray(data) && data.every((e) => !isNil(e.category));
 
     const offsetReducer = <T>(offset: string, data: T[]) => data.slice(Number(offset));
     const limitReducer = <T>(limit: string, data: T[]) => data.slice(0, Number(limit));
@@ -136,7 +170,7 @@ export class InMemoryDataService {
     return (data: I, params: Dictionary<string>) => {
       const param = params[paramKey];
       const predicatePass = isNil(predicate) ? true : predicate(data);
-      return isNotNil(param) && predicatePass ? func(param, data): data;
+      return !isNil(param) && predicatePass ? func(param, data) : data;
     };
   }
 
