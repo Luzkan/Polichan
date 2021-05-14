@@ -30,4 +30,12 @@ export class ApiService {
     }
     return this.httpClient.get<T>(url, options);
   }
+
+  post<T>(patternKey: string, payload: T, pathParams: Dictionary<string> = {}): Observable<T> {
+    const url = this.urlService.prepareUrlForKey(patternKey, pathParams);
+    if (appConfig.inMemoryApiEnabled) {
+      return of(this.inMemoryDataService.post(url, payload));
+    }
+    return this.httpClient.post<T>(url, payload);
+  }
 }

@@ -1,4 +1,19 @@
 {
+  "Board.LoadMore": "Load More",
+
+  "Board.Title.Arch": "/arch/ - Architektura",
+  "Board.Title.Bio": "/bio/ - Biologia i Natura",
+  "Board.Title.Bud": "/bud/ - Budowa",
+  "Board.Title.Chem": "/chem/ - Chemia i Mieszadełka",
+  "Board.Title.Elec": "/elec/ - Elektryka i Elektronika",
+  "Board.Title.It": "/it/ - Programowanie i Informatyka",
+  "Board.Title.Math": "/math/ - Matematyka i Cyferki",
+  "Board.Title.Mech": "/mech/ - Mechanika",
+  "Board.Title.Med": "/med/ - Medycyna i Lekarskie",
+  "Board.Title.Phys": "/phys/ - Fizyka i Astronomia",
+  "Board.Title.Poli": "/poli/ - Politechnika",
+  "Board.Title.Random": "/random/ - Tematy Przeróżne",
+
   "Header.Navbar.Item.Arch": "arch",
   "Header.Navbar.Item.Bio": "bio",
   "Header.Navbar.Item.Bud": "bud",

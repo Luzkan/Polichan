@@ -1,6 +1,6 @@
 export enum ApiPatternKey {
   THREAD = 'THREAD',
   THREADS = 'THREADS',
-  POST = 'POST',
+  POSTS = 'POSTS',
   THREAD_POSTS = 'THREAD_POSTS',
 }

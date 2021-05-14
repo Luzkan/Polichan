@@ -1,7 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './components/home/home.component';
 import {CategoryResolver} from './components/category/category-resolver.service';
+import {ThreadComponent} from './components/thread/thread.component';
+import {MainBoardComponent} from './components/board/mian-board.component';
+import {RandomBoardComponent} from './components/board/random-board.component';
+import {CategoryBoardComponent} from './components/board/category-board.component';
 
 const routes: Routes = [
   {
@@ -11,17 +14,17 @@ const routes: Routes = [
   },
   {
     path: 'main',
-    component: HomeComponent,
+    component: MainBoardComponent,
     pathMatch: 'full',
   },
   {
     path: 'random',
-    component: HomeComponent,
+    component: RandomBoardComponent,
     pathMatch: 'full',
   },
   {
     path: 'category/:id',
-    component: HomeComponent,
+    component: CategoryBoardComponent,
     pathMatch: 'full',
     resolve: {
       categoryId: CategoryResolver,
@@ -29,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'thread/:id',
-    component: HomeComponent,
+    component: ThreadComponent,
     pathMatch: 'full',
   },
   {

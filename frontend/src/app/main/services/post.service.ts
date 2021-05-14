@@ -5,6 +5,7 @@ import {Dictionary} from '../../core/types/dictionary.model';
 import {Post} from '../models/post.model';
 import {BaseApiService} from '../../core/api/base-api.service';
 import {ApiPatternKey} from '../../core/api/api-pattern-key.model';
+import {Pageable} from '../../core/api/pageable.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,16 +15,11 @@ export class PostService extends BaseApiService {
     super(apiService);
   }
 
-  getPost(id: string): Observable<Post> {
-    const pathParams: Dictionary<string> = {'id': id};
-    return this.apiService.get<Post>(ApiPatternKey.POST, pathParams);
-  }
-
-  getPosts(threadId: string, limit?: number): Observable<Post[]> {
+  getPosts(threadId: string, pageable?: Pageable): Observable<Post[]> {
     const queryParam: Dictionary<string> = {};
     const pathParams: Dictionary<string> = {};
-    this.addOptionalEntry(queryParam, 'limit', String(limit));
-    this.addOptionalEntry(pathParams, 'id', threadId);
+    this.setOptionalEntry(pathParams, 'id', threadId);
+    this.setPageableParams(queryParam, pageable);
     return this.apiService.get<Post[]>(ApiPatternKey.THREAD_POSTS, pathParams, queryParam);
   }
 }
