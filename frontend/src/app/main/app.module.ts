@@ -23,9 +23,19 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+const translationConfig = {
+  defaultLanguage: 'en',
+  loader: {
+    provide: TranslateLoader,
+    useFactory: HttpLoaderFactory,
+    deps: [HttpClient],
+  },
+};
 
 @NgModule({
   declarations: [
@@ -50,14 +60,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
+    TranslateModule.forRoot(translationConfig),
   ],
   bootstrap: [AppComponent],
 })

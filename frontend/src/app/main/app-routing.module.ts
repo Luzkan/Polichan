@@ -1,23 +1,40 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
-import {TestComponent} from './components/test/test.component';
-import {MainpageThreadComponent} from './components/thread/mainpage-thread.component';
+import {CategoryResolver} from './components/category/category-resolver.service';
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'main',
+    pathMatch: 'full',
+  },
+  {
+    path: 'main',
     component: HomeComponent,
     pathMatch: 'full',
   },
   {
-    path: 'test',
-    component: TestComponent,
+    path: 'random',
+    component: HomeComponent,
     pathMatch: 'full',
   },
   {
-    path: 'thread',
-    component: MainpageThreadComponent,
+    path: 'category/:id',
+    component: HomeComponent,
+    pathMatch: 'full',
+    resolve: {
+      categoryId: CategoryResolver,
+    },
+  },
+  {
+    path: 'thread/:id',
+    component: HomeComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    redirectTo: '',
     pathMatch: 'full',
   },
 ];

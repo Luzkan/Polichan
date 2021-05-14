@@ -1,3 +1,16 @@
 {
-  "Test": "hello test"
+  "Header.Navbar.Item.Arch": "arch",
+  "Header.Navbar.Item.Bio": "bio",
+  "Header.Navbar.Item.Bud": "bud",
+  "Header.Navbar.Item.Chem": "chem",
+  "Header.Navbar.Item.Elec": "elec",
+  "Header.Navbar.Item.It": "it",
+  "Header.Navbar.Item.Math": "math",
+  "Header.Navbar.Item.Mech": "mech",
+  "Header.Navbar.Item.Med": "med",
+  "Header.Navbar.Item.Phys": "phys",
+  "Header.Navbar.Item.Poli": "poli",
+  "Header.Navbar.Item.Random": "random",
+  "Header.Options": "Options",
+  "Header.Title": "Polichan"
 }

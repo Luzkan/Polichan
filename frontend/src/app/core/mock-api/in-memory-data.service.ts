@@ -95,7 +95,6 @@ export class InMemoryDataService {
   }
 
   public get<T>(path: string, options: Options): T {
-    console.log(path, options);
     const data = this.database[path];
     return this.handleOptions(data, options);
   }
