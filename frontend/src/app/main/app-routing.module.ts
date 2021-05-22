@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {CategoryResolver} from './components/category/category-resolver.service';
+import {CategoryResolver} from './services/category-resolver.service';
 import {ThreadComponent} from './components/thread/thread.component';
 import {MainBoardComponent} from './components/board/mian-board.component';
 import {RandomBoardComponent} from './components/board/random-board.component';
 import {CategoryBoardComponent} from './components/board/category-board.component';
+import {ThreadResolver} from './services/thread-resolver.service';
 
 const routes: Routes = [
   {
@@ -34,6 +35,9 @@ const routes: Routes = [
     path: 'thread/:id',
     component: ThreadComponent,
     pathMatch: 'full',
+    resolve: {
+      threadId: ThreadResolver,
+    },
   },
   {
     path: '**',

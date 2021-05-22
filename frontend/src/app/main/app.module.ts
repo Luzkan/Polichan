@@ -8,7 +8,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TestComponent} from './components/test/test.component';
 import {PostComponent} from './components/post/post.component';
-import {ReplyComponent} from './components/reply/reply.component';
+import {EntryFormComponent} from './components/reply/entry-form.component';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BoardThreadComponent} from './components/board/thread/board-thread.component';
@@ -47,7 +47,7 @@ const translationConfig = {
     FooterComponent,
     TestComponent,
     PostComponent,
-    ReplyComponent,
+    EntryFormComponent,
     ThreadComponent,
     MainBoardComponent,
     RandomBoardComponent,

@@ -5,7 +5,7 @@ import {Thread} from '../../models/thread.model';
 import {Observable} from 'rxjs';
 import {ThreadService} from '../../services/thread.service';
 import {ActivatedRoute} from '@angular/router';
-import {map, shareReplay, switchMap} from 'rxjs/operators';
+import {first, map, shareReplay, switchMap} from 'rxjs/operators';
 import {ThreadCategory} from '../../models/thread-category.model';
 
 @Component({
@@ -29,17 +29,18 @@ export class CategoryBoardComponent extends AbstractBoardComponent {
     super.ngOnInit();
   }
 
-
   private init(): void {
     this.addSubscription(this.categorySource.subscribe((category) => {
       this.setTitleForCategory(category);
       this.setupReplyForm(category);
+      this.resetThreads();
     }));
   }
 
   protected getThreadsForPage(pageable: Pageable): Observable<Thread[]> {
     return this.categorySource.pipe(
         switchMap((categoryId) => this.threadService.getThreads(categoryId, pageable)),
+        first(),
     );
   }
 }

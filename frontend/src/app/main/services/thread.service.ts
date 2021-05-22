@@ -7,12 +7,16 @@ import {Dictionary} from '../../core/types/dictionary.model';
 import {BaseApiService} from '../../core/api/base-api.service';
 import {ApiPatternKey} from '../../core/api/api-pattern-key.model';
 import {Pageable} from '../../core/api/pageable.model';
+import {ImageResourceService} from './image-resource.service';
+import {ThreadFormData} from '../models/form/thread-form-data.model';
+import {switchMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThreadService extends BaseApiService {
-  constructor(apiService: ApiService) {
+  constructor(private readonly imageResourceService: ImageResourceService,
+      apiService: ApiService) {
     super(apiService);
   }
 
@@ -35,7 +39,10 @@ export class ThreadService extends BaseApiService {
     return this.apiService.get<Thread[]>(ApiPatternKey.THREADS);
   }
 
-  saveThread(thread: Thread): Observable<Thread> {
-    return this.apiService.post(ApiPatternKey.THREADS, thread);
+  saveThread(thread: ThreadFormData): Observable<Thread> {
+    return this.imageResourceService.saveImageAndUpdateContainer(thread).pipe(
+        switchMap((updatedThread) =>
+          this.apiService.post<ThreadFormData, Thread>(ApiPatternKey.THREADS, updatedThread)),
+    );
   }
 }

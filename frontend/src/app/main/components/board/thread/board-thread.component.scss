@@ -36,7 +36,8 @@
   margin-bottom: 0;
 }
 
-.post-expand{
+.post-expand {
+  text-align: center;
   color: $muted-accent-color;
 }
 
@@ -52,4 +53,28 @@
   // Small left padding for indentation posts in a thread (easier to distinct)
   padding-left: 1.5%;
   padding-right: 3%;
+}
+
+.thread {
+
+  .post-hidden-preview-content {
+    display: none;
+  }
+
+  &.thread--hidden {
+
+    .no-margin {
+      margin: 0;
+    }
+
+    .post-hidden-preview-content {
+      display: unset;
+    }
+
+    .posts-container,
+    .thread-content,
+    .posts-in-thread {
+      display: none;
+    }
+  }
 }

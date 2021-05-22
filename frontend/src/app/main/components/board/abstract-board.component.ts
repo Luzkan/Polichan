@@ -6,16 +6,18 @@ import {ThreadCategory} from '../../models/thread-category.model';
 import {Observable} from 'rxjs';
 import {Pageable} from '../../../core/api/pageable.model';
 import {ThreadService} from '../../services/thread.service';
+import {EntryFormData} from '../../models/form/base-form-data.model';
+import {ThreadFormData} from '../../models/form/thread-form-data.model';
 
 @Directive()
 export abstract class AbstractBoardComponent extends AbstractCleanable implements OnInit {
-  private readonly pageLimit = 3;
+  private static readonly pageLimit = 3;
   category: Optional<ThreadCategory>;
   titleTranslationKey: string = '';
 
   threads: Thread[] = [];
   allThreadLoaded = false;
-  private pageable: Optional<Pageable>;
+  private pageable = Pageable.forLimit(AbstractBoardComponent.pageLimit);
 
   constructor(private readonly changeDetector: ChangeDetectorRef,
               protected readonly threadService: ThreadService) {
@@ -44,27 +46,29 @@ export abstract class AbstractBoardComponent extends AbstractCleanable implement
   resetThreads(): void {
     this.threads = [];
     this.allThreadLoaded = false;
-    this.loadForPage(Pageable.forLimit(this.pageLimit));
+    this.loadFirstPage();
+  }
+
+  loadFirstPage(): void {
+    this.pageable = Pageable.forLimit(AbstractBoardComponent.pageLimit);
+    this.loadNextPage();
   }
 
   loadNextPage(): void {
-    this.loadForPage(this.getPageable().nextPage());
-  }
-
-  private loadForPage(pageable: Pageable): void {
     this.addSubscription(
-        this.getThreadsForPage(pageable).subscribe((additionalThreads) => {
+        this.getThreadsForPage(this.pageable).subscribe((additionalThreads) => {
           this.setAdditionalThreads(additionalThreads);
-          this.setAllThreadLoadedForResult(additionalThreads, pageable);
-          this.pageable = pageable;
+          this.updatePageable(additionalThreads, this.pageable);
           this.markForCheck();
         }),
         'PageLoad',
     );
   }
 
-  private setAllThreadLoadedForResult(threads: Thread[], pageable: Pageable): void {
-    this.allThreadLoaded = threads.length !== pageable.limit;
+  private updatePageable(threads: Thread[], pageable: Pageable): void {
+    const loaded = threads.length;
+    pageable.shiftOffset(loaded);
+    this.allThreadLoaded = loaded !== pageable.limit;
   }
 
   private setAdditionalThreads(threads: Thread[]): void {
@@ -72,19 +76,16 @@ export abstract class AbstractBoardComponent extends AbstractCleanable implement
     this.threads = current.concat(threads);
   }
 
-  saveThread(thread: Thread): void {
+  saveThread(entry: EntryFormData): void {
+    const category = this.category as ThreadCategory;
+    const thread: ThreadFormData = {...entry, category};
     this.addSubscription(
-        this.threadService.saveThread(thread).subscribe((savedThread) => {
-          console.log(savedThread);
-          this.resetThreads();
+        this.threadService.saveThread(thread).subscribe(() => {
+          this.allThreadLoaded = false;
           this.markForCheck();
         }),
         'saveThread',
     );
-  }
-
-  private getPageable(): Pageable {
-    return this.safeGetter(this.pageable, 'pageable');
   }
 
   private markForCheck(): void {

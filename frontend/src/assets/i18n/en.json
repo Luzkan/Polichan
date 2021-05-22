@@ -14,6 +14,14 @@
   "Board.Title.Poli": "/poli/ - Politechnika",
   "Board.Title.Random": "/random/ - Tematy Przeróżne",
 
+  "EntryForm.Label.Nickname": "Nickname",
+  "EntryForm.Label.Password": "Password",
+  "EntryForm.Label.Text": "Text",
+  "EntryForm.Label.Image": "Insert an Image...",
+  "EntryForm.Image.MaxSize": "Maximum filesize",
+  "EntryForm.Image.SupportedTypes": "Supported filetypes",
+  "EntryForm.Submit": "Submit",
+
   "Header.Navbar.Item.Arch": "arch",
   "Header.Navbar.Item.Bio": "bio",
   "Header.Navbar.Item.Bud": "bud",
@@ -27,5 +35,11 @@
   "Header.Navbar.Item.Poli": "poli",
   "Header.Navbar.Item.Random": "random",
   "Header.Options": "Options",
-  "Header.Title": "Polichan"
+  "Header.Title": "Polichan",
+
+  "Thread.LoadNextPage": "Load next page",
+  "ThreadsBoard.ThreadDetails": "Check details",
+  "ThreadsBoard.ShowLastPosts": "Show last posts",
+  "ThreadsBoard.HideLastPosts": "Hide last posts"
+
 }

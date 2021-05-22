@@ -38,18 +38,20 @@ export class BoardThreadComponent extends AbstractCleanable implements OnInit {
 
   toggleShowThread() {
     this.threadIsShown = !this.threadIsShown;
+    if (!this.threadIsShown) {
+      this.postsInThreadAreShown = false;
+    }
   }
 
   toggleShowPostsInThread() {
     this.postsInThreadAreShown = !this.postsInThreadAreShown;
-    // if (this.postsInThreadAreShown) { element.text = '[-]' } else { element = '[+]' }
   }
 
   ngOnInit(): void {
     this.loadPostsForThread(this.getThread());
   }
 
-  private loadPostsForThread(thread: Thread):void {
+  private loadPostsForThread(thread: Thread): void {
     this.addSubscription(
         this.postService.getPosts(thread.id, this.pageable)
             .subscribe((posts) => {

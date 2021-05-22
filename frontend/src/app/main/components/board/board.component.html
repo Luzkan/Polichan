@@ -4,7 +4,7 @@
     <h3>{{ titleTranslationKey | translate}}</h3>
   </div>
 
-  <app-reply *ngIf="category" [threadCategory]="category" (threadSubmitted)="saveThread($event)"></app-reply>
+  <app-entry-form *ngIf="category" (entrySubmitted)="saveThread($event)"></app-entry-form>
 
   <div class="thread-list" *ngIf="threads.length">
     <app-board-thread *ngFor="let thread of threads" [thread]="thread"></app-board-thread>
