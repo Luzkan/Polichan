@@ -17,4 +17,8 @@ export class Pageable {
     const offset = this.offset ?? 0;
     return Pageable.forLimit(this.limit, offset + this.limit);
   }
+
+  shiftOffset(n: number): void {
+    this.offset = (this.offset ?? 0) + n;
+  }
 }

@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ReplyComponent} from './reply.component';
+import {EntryFormComponent} from './entry-form.component';
 
 describe('HomeComponent', () => {
-  let component: ReplyComponent;
-  let fixture: ComponentFixture<ReplyComponent>;
+  let component: EntryFormComponent;
+  let fixture: ComponentFixture<EntryFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ReplyComponent],
+      declarations: [EntryFormComponent],
     })
         .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReplyComponent);
+    fixture = TestBed.createComponent(EntryFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

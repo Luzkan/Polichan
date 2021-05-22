@@ -7,6 +7,9 @@ import {Dictionary} from '../types/dictionary.model';
 import {ThreadCategory} from '../../main/models/thread-category.model';
 import {UrlService} from '../config/url.service';
 import {ApiPatternKey} from '../api/api-pattern-key.model';
+import {ImageResource} from '../../main/models/form/image-resource.model';
+import {PostFormData} from '../../main/models/form/post-form-data.model';
+import {ThreadFormData} from '../../main/models/form/thread-form-data.model';
 
 type Predicate<I> = (value: I) => boolean
 type PipeReducer<I, O> = (data: I, params: Dictionary<string>) => I | O
@@ -18,6 +21,7 @@ type Options = { params: Dictionary<string>, headers: Dictionary<string> };
   providedIn: 'root',
 })
 export class InMemoryDataService {
+  private static readonly ImageURL = 'assets/images/obrazek1.jpg';
   private database: Dictionary<any> = {};
   private readonly paramReducer: PipeReducer<any, any>;
   private readonly headerReducer: PipeReducer<any, any>;
@@ -35,30 +39,29 @@ export class InMemoryDataService {
     this.createPosts(5, threads).map((post) => this.savePost(post));
   }
 
-  private createThreads(n: number): Thread[] {
+  private createThreads(n: number): ThreadFormData[] {
     return Array(n).fill(0).map(() => this.createFakeThread());
   }
 
-  private createPosts(n: number, threads: Thread[]): Post[] {
+  private createPosts(n: number, threads: Thread[]): PostFormData[] {
     return flatMap(threads.map((thread) => (Array(n).fill(0).map(() => this.createFakePost(thread.id)))));
   }
 
-  private createFakeThread(): any {
+  private createFakeThread(): ThreadFormData {
     return {
-      topic: faker.lorem.words(4),
       nickname: faker.name.firstName(),
-      date: faker.date.past(2),
+      password: faker.name.firstName(),
+      content: faker.lorem.lines(8),
       category: faker.random.arrayElement(Object.values(ThreadCategory)),
     };
   }
 
-  private createFakePost(threadId: string): any {
+  private createFakePost(threadId: string): PostFormData {
     return {
       threadId: threadId,
       nickname: faker.name.firstName(),
-      content: faker.lorem.lines(8),
-      date: faker.date.past(2),
-      imgUrl: 'assets/images/obrazek1.jpg',
+      password: faker.name.firstName(),
+      content: faker.lorem.lines(3),
     };
   }
 
@@ -72,8 +75,15 @@ export class InMemoryDataService {
     };
   }
 
-  private savePost(post: any): Post {
-    post.id = this.postIdGen.next();
+  private savePost(postData: PostFormData): Post {
+    const post: Post = {
+      id: this.postIdGen.next(),
+      threadId: postData.threadId,
+      nickname: postData.nickname,
+      content: postData.content,
+      date: faker.date.past(2),
+      imgUrl: InMemoryDataService.ImageURL,
+    };
 
     const postsPath = this.prepareUrl(ApiPatternKey.POSTS);
     this.saveInArray(postsPath, post);
@@ -83,9 +93,20 @@ export class InMemoryDataService {
     return post;
   }
 
-  private saveThread(thread: any): Thread {
-    thread.id = this.threadIdGen.next();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private saveImage(post: FormData): ImageResource {
+    return {id: '1', imgUrl: InMemoryDataService.ImageURL};
+  }
 
+  private saveThread(threadData: ThreadFormData): Thread {
+    const thread: Thread = {
+      id: this.threadIdGen.next(),
+      category: threadData.category,
+      nickname: threadData.nickname,
+      content: threadData.content,
+      date: faker.date.past(2),
+      imgUrl: InMemoryDataService.ImageURL,
+    };
     const path = this.prepareUrl(ApiPatternKey.THREADS);
     this.saveInArray(path, thread);
 
@@ -112,7 +133,8 @@ export class InMemoryDataService {
 
   post(path: string, payload: any): any {
     const threadsPath = this.prepareUrl(ApiPatternKey.THREADS);
-    const postsPath = this.prepareUrl(ApiPatternKey.THREADS);
+    const postsPath = this.prepareUrl(ApiPatternKey.POSTS);
+    const imagePath = this.prepareUrl(ApiPatternKey.IMAGE_UPLOAD);
     console.log('--------------------------');
     console.log('POST', path);
     switch (path) {
@@ -120,8 +142,10 @@ export class InMemoryDataService {
         return this.saveThread(payload);
       case postsPath:
         return this.savePost(payload);
+      case imagePath:
+        return this.saveImage(payload);
       default:
-        throw new Error('POST path not handled');
+        throw new Error(`POST path not handled ${path}`);
     }
   }
 

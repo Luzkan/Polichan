@@ -3,4 +3,5 @@ export enum ApiPatternKey {
   THREADS = 'THREADS',
   POSTS = 'POSTS',
   THREAD_POSTS = 'THREAD_POSTS',
+  IMAGE_UPLOAD = 'IMAGE_UPLOAD',
 }

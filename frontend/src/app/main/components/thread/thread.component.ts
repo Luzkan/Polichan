@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input,
   OnInit,
 } from '@angular/core';
 import {AbstractCleanable} from '../../../core/cleanable/abstract-cleanable.component';
@@ -11,6 +10,11 @@ import {Thread} from '../../models/thread.model';
 import {Post} from '../../models/post.model';
 import {PostService} from '../../services/post.service';
 import {Pageable} from '../../../core/api/pageable.model';
+import {Observable} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {map, shareReplay} from 'rxjs/operators';
+import {EntryFormData} from '../../models/form/base-form-data.model';
+import {PostFormData} from '../../models/form/post-form-data.model';
 
 @Component({
   selector: 'app-thread',
@@ -19,47 +23,82 @@ import {Pageable} from '../../../core/api/pageable.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThreadComponent extends AbstractCleanable implements OnInit {
-  @Input()
+  private static readonly pageLimit = 4;
+  private readonly threadSource: Observable<Thread>;
+  private pageable = Pageable.forLimit(ThreadComponent.pageLimit);
+
   thread: Optional<Thread>;
+  allPostsLoaded = false;
+  posts: Post[] = [];
 
-  posts: Optional<Post[]>;
-
-  threadIsShown: boolean = true;
-
-  postsInThreadAreShown: boolean = false;
-
-  private readonly pageable = Pageable.forLimit(3);
-
-  constructor(private readonly changeDetector: ChangeDetectorRef,
+  constructor(private readonly route: ActivatedRoute,
+              private readonly changeDetector: ChangeDetectorRef,
               private readonly postService: PostService) {
     super();
-  }
-
-  toggleShowThread() {
-    this.threadIsShown = !this.threadIsShown;
-  }
-
-  toggleShowPostsInThread() {
-    this.postsInThreadAreShown = !this.postsInThreadAreShown;
-    // if (this.postsInThreadAreShown) { element.text = '[-]' } else { element = '[+]' }
+    this.threadSource = this.route.data.pipe(map((data) => data.threadId), shareReplay(1));
   }
 
   ngOnInit(): void {
-    this.loadPostsForThread(this.getThread());
+    this.addSubscription(
+        this.threadSource.subscribe((thread) => {
+          this.resetForThread(thread);
+        }),
+        'loadThread',
+    );
   }
 
-  private loadPostsForThread(thread: Thread):void {
+  resetForThread(thread: Thread): void {
+    this.allPostsLoaded = false;
+    this.thread = thread;
+    this.posts = [];
+    this.loadFirstPage();
+  }
+
+  loadFirstPage(): void {
+    this.pageable = Pageable.forLimit(ThreadComponent.pageLimit);
+    this.loadNextPage();
+  }
+
+  loadNextPage(): void {
+    const threadId = this.getThread().id;
     this.addSubscription(
-        this.postService.getPosts(thread.id, this.pageable)
-            .subscribe((posts) => {
-              this.posts = posts;
-              this.changeDetector.markForCheck();
-            }),
-        'loadPostsForThread',
+        this.postService.getPosts(threadId, this.pageable).subscribe((additionalPosts) => {
+          this.setAdditionalPosts(additionalPosts);
+          this.updatePageable(additionalPosts, this.pageable);
+          this.markForCheck();
+        }),
+        'PageLoad',
+    );
+  }
+
+  private updatePageable(posts: Post[], pageable: Pageable): void {
+    const loaded = posts.length;
+    pageable.shiftOffset(loaded);
+    this.allPostsLoaded = loaded !== pageable.limit;
+  }
+
+  private setAdditionalPosts(posts: Post[]): void {
+    const current = this.posts;
+    this.posts = current.concat(posts);
+  }
+
+  savePost(entry: EntryFormData): void {
+    const threadId = this.getThread().id;
+    const post: PostFormData = {...entry, threadId: threadId};
+    this.addSubscription(
+        this.postService.savePost(post).subscribe(() => {
+          this.allPostsLoaded = false;
+          this.markForCheck();
+        }),
+        'savePost',
     );
   }
 
   private getThread(): Thread {
     return this.safeGetter(this.thread, 'thread');
+  }
+
+  private markForCheck(): void {
+    this.changeDetector.markForCheck();
   }
 }

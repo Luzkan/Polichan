@@ -15,6 +15,7 @@ export const baseEnvironment = {
       [ApiPatternKey.THREADS]: '/threads',
       [ApiPatternKey.POSTS]: '/posts',
       [ApiPatternKey.THREAD_POSTS]: '/thread/{id}/posts',
+      [ApiPatternKey.IMAGE_UPLOAD]: '/resources',
     } as Dictionary<string>,
   },
 };

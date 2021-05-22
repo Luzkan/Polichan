@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router} from '@angular/router';
-import {ThreadCategory} from '../../models/thread-category.model';
-import {threadCategoryByRouteId} from '../../navigation/route-category-id.model';
+import {ThreadCategory} from '../models/thread-category.model';
+import {threadCategoryByRouteId} from '../navigation/route-category-id.model';
 import {isNil} from 'lodash-es';
 
 @Injectable({
