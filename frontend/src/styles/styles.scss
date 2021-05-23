@@ -17,3 +17,44 @@ a {
 a:hover {
   color: $text-a-hover;
 }
+
+.enlarged-image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid $background-accent-color;
+  // This below has to be set, because otherwise
+  // there's 1px padding between image and border
+  padding: 0;
+  cursor: grab;
+  transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+  border-radius: 5px;
+  box-shadow: 0 6px 2px -4px rgba(0, 0, 0, 0.5),
+              0 4px 4px 0 rgba(0, 0, 0, 0.35),
+              0 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.enlarged-image:active {
+  cursor: grabbing;
+}
+
+.enlarged-image > .close-button {
+  color: $text-muted-color;
+  width: 0;
+  height: 0;
+  top: 0;
+  right: 14px;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  position: absolute;
+}
+
+.enlarged-image > .close-button:hover {
+  color: $text-color;
+}
+
+.enlarged-image > .close-button:focus {
+  border: none;
+}
