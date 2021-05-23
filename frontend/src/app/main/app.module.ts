@@ -23,6 +23,7 @@ import {ThreadComponent} from './components/thread/thread.component';
 import {MainBoardComponent} from './components/board/mian-board.component';
 import {RandomBoardComponent} from './components/board/random-board.component';
 import {CategoryBoardComponent} from './components/board/category-board.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -68,6 +69,7 @@ const translationConfig = {
     SharedModule,
     ReactiveFormsModule,
     TranslateModule.forRoot(translationConfig),
+    DragDropModule,
   ],
   bootstrap: [AppComponent],
 })

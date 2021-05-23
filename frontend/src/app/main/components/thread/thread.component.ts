@@ -31,11 +31,40 @@ export class ThreadComponent extends AbstractCleanable implements OnInit {
   allPostsLoaded = false;
   posts: Post[] = [];
 
+  showModal: boolean = false;
+  show() {
+    this.showModal = true;
+  }
+  hide() {
+    this.showModal = false;
+  }
+
   constructor(private readonly route: ActivatedRoute,
               private readonly changeDetector: ChangeDetectorRef,
               private readonly postService: PostService) {
     super();
     this.threadSource = this.route.data.pipe(map((data) => data.threadId), shareReplay(1));
+  }
+
+  onScroll(event: any): void {
+    if (event.target.localName !== 'img') return;
+    event.preventDefault();
+
+    const targetStyle = event.target.parentNode.parentNode.style;
+
+    const scalePattern = /scale\([0-9|\.]*\)/;
+    const parenthesesPattern = /\(([^)]+)\)/;
+
+    const matches = targetStyle.transform.match(scalePattern);
+    let scaleValue = parseFloat(matches[0].match(parenthesesPattern)[1]);
+
+    if (event.deltaY < 0) {
+      scaleValue += 0.1;
+      targetStyle.transform = targetStyle.transform.replace(scalePattern, 'scale(' + scaleValue + ')');
+    } else {
+      scaleValue -= 0.1;
+      targetStyle.transform = targetStyle.transform.replace(scalePattern, 'scale(' + scaleValue + ')');
+    }
   }
 
   ngOnInit(): void {

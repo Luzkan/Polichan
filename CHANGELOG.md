@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [[0.6.0]] - 2021-05-23
+### Added
+- Image Features:
+    - Image can now be enlarged into full view from the preview.
+    - Full Image View is draggable
+    - Full Image View is resizable via scroll wheel
+    - Image can be closed with `X` in the top right corner.
+
+<img src="./docs/img/polichan_image_feature_v0_6_0.gif" width="900"/>
+
 ## [[0.5.0]] - 2021-05-16
 ### Added
 - Feature: Internationalization - Configuration & propagation
@@ -76,6 +86,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `README.md`
 
 
+[0.6.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.6.0
+[0.5.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.5.0
 [0.4.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.4.0
 [0.3.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.3.0
 [0.2.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.2.0
