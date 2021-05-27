@@ -14,6 +14,9 @@
   "Board.Title.Poli": "/poli/ - Politechnika",
   "Board.Title.Random": "/random/ - Tematy Przeróżne",
 
+  "DateAgo.Ago": "{count} {unit}{count, plural, one{} other{s}} ago",
+  "DateAgo.Now": "Just now",
+
   "EntryForm.Label.Nickname": "Nickname",
   "EntryForm.Label.Password": "Password",
   "EntryForm.Label.Text": "Text",
@@ -21,6 +24,8 @@
   "EntryForm.Image.MaxSize": "Maximum filesize",
   "EntryForm.Image.SupportedTypes": "Supported filetypes",
   "EntryForm.Submit": "Submit",
+
+  "ReplyForm.InvalidValue": "Invalid value",
 
   "Header.Navbar.Item.Arch": "arch",
   "Header.Navbar.Item.Bio": "bio",
@@ -37,9 +42,15 @@
   "Header.Options": "Options",
   "Header.Title": "Polichan",
 
+  "Modal.Error.Authentication.Ok": "Ok, I understand",
+  "Modal.Error.Authentication.Header": "Invalid password!",
+  "Modal.Error.Authentication.Message": "The given nickname is already in use. Use a different one or enter the correct password",
+  "Modal.Error.Default.Ok": "Ok, I will try later",
+  "Modal.Error.Default.Header": "Ups!",
+  "Modal.Error.Default.Message": "Sorry, something went wrong!",
+
   "Thread.LoadNextPage": "Load next page",
   "ThreadsBoard.ThreadDetails": "Check details",
   "ThreadsBoard.ShowLastPosts": "Show last posts",
   "ThreadsBoard.HideLastPosts": "Hide last posts"
-
 }

@@ -35,6 +35,11 @@ export class EntryFormComponent extends AbstractCleanable implements OnInit {
     super();
   }
 
+  isErrorVisible(controlName: string): boolean {
+    const ctrl = this.replyFormGroup?.get(controlName) as FormControl;
+    return isNil(ctrl) ? false : (ctrl.touched || ctrl.dirty) && ctrl.invalid;
+  }
+
   ngOnInit(): void {
     const fileValidators = [this.createFileValidator()];
     if (this.imageRequired) {
@@ -87,5 +92,9 @@ export class EntryFormComponent extends AbstractCleanable implements OnInit {
 
   markForCheck(): void {
     this.changeDetector.markForCheck();
+  }
+
+  fileInputTouched() {
+    this.getFormGroup().get('imageFile')?.markAsTouched();
   }
 }

@@ -13,8 +13,7 @@
             <p>
               <span class="post-nickname">Anonymous</span>
               <span class="post-badge badge badge-danger ml-1">{{ thread.nickname }}</span> |
-              <span class="post-date-time">{{ thread.date | dateAgo }}</span> |
-              <span class="post-id"><a>{{ thread.id }}</a></span>
+              <span class="post-date-time">{{ thread.date | dateAgo | async }}</span>
             </p>
           </div>
           <div class="media mb-4 hidden">

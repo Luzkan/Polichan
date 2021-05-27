@@ -15,6 +15,9 @@ import {ActivatedRoute} from '@angular/router';
 import {map, shareReplay} from 'rxjs/operators';
 import {EntryFormData} from '../../models/form/base-form-data.model';
 import {PostFormData} from '../../models/form/post-form-data.model';
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ErrorModalComponent} from '../../../shared/error/error-modal.component';
 
 @Component({
   selector: 'app-thread',
@@ -41,6 +44,7 @@ export class ThreadComponent extends AbstractCleanable implements OnInit {
 
   constructor(private readonly route: ActivatedRoute,
               private readonly changeDetector: ChangeDetectorRef,
+              private readonly modalService: BsModalService,
               private readonly postService: PostService) {
     super();
     this.threadSource = this.route.data.pipe(map((data) => data.threadId), shareReplay(1));
@@ -52,7 +56,7 @@ export class ThreadComponent extends AbstractCleanable implements OnInit {
 
     const targetStyle = event.target.parentNode.parentNode.style;
 
-    const scalePattern = /scale\([0-9|\.]*\)/;
+    const scalePattern = /scale\([0-9|.]*\)/;
     const parenthesesPattern = /\(([^)]+)\)/;
 
     const matches = targetStyle.transform.match(scalePattern);
@@ -95,7 +99,7 @@ export class ThreadComponent extends AbstractCleanable implements OnInit {
           this.setAdditionalPosts(additionalPosts);
           this.updatePageable(additionalPosts, this.pageable);
           this.markForCheck();
-        }),
+        }, () => this.handleLoadingPostsError()),
         'PageLoad',
     );
   }
@@ -118,7 +122,7 @@ export class ThreadComponent extends AbstractCleanable implements OnInit {
         this.postService.savePost(post).subscribe(() => {
           this.allPostsLoaded = false;
           this.markForCheck();
-        }),
+        }, (error) => this.handleSavePostError(error)),
         'savePost',
     );
   }
@@ -129,5 +133,26 @@ export class ThreadComponent extends AbstractCleanable implements OnInit {
 
   private markForCheck(): void {
     this.changeDetector.markForCheck();
+  }
+
+  private handleLoadingPostsError(): void {
+    this.showErrorModal();
+  }
+
+  private handleSavePostError(error: HttpErrorResponse): void {
+    if (error.status == 401) {
+      const state: Partial<ErrorModalComponent> = {
+        headerKey: 'Modal.Error.Authentication.Header',
+        messageKey: 'Modal.Error.Authentication.Message',
+        successButtonKey: 'Modal.Error.Authentication.Ok',
+      };
+      this.showErrorModal(state);
+      return;
+    }
+    this.showErrorModal();
+  }
+
+  private showErrorModal(state?: Partial<ErrorModalComponent>) {
+    this.modalService.show(ErrorModalComponent, {initialState: state});
   }
 }
