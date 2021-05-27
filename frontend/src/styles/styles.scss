@@ -58,3 +58,11 @@ a:hover {
 .enlarged-image > .close-button:focus {
   border: none;
 }
+
+.modal-content {
+  background-color: $background-color !important;
+
+  .modal-header {
+    border-bottom-color: $background-secondary-color !important;
+  }
+}

@@ -6,7 +6,7 @@
           <p class='no-margin'>
             <span class="post-nickname">Anonymous</span>
             <span class="post-badge badge badge-danger ml-1">{{ thread.nickname }}</span> |
-            <span class="post-date-time">{{ thread.date | dateAgo }}</span> |
+            <span class="post-date-time">{{ thread.date | dateAgo | async }}</span> |
             <span class="post-id"><a>{{ thread.id }}</a></span> |
             <span class="post-collapse" (click)="toggleShowThread()"><a>{{ threadIsShown ? '[–]' : '[+]'}}</a></span>
             <span class="post-hidden-preview-content"> | {{thread.content.substring(0, 50)}}...</span>

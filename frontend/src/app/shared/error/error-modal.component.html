@@ -1,0 +1,11 @@
+<header class="modal-header">
+  <h4 class="modal-title">{{ headerKey | translate}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+  </button>
+</header>
+<div class="modal-body">
+  <span>{{ messageKey | translate }}</span>
+  <div class="d-flex flex-row-reverse mt-4">
+    <button class="btn btn-success" (click)="close()">{{ successButtonKey | translate }}</button>
+  </div>
+</div>
