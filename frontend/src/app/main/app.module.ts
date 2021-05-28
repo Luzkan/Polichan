@@ -27,6 +27,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {TranslateModuleConfig} from '@ngx-translate/core/public_api';
 import {TranslateMessageFormatCompiler} from 'ngx-translate-messageformat-compiler';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import {ImageComponent} from './components/image/image.component';
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -61,6 +62,7 @@ const translationConfig: TranslateModuleConfig = {
     RandomBoardComponent,
     BoardThreadComponent,
     CategoryBoardComponent,
+    ImageComponent,
   ],
   imports: [
     NgbModule,
