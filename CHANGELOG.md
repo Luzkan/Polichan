@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [[0.8.0]] - 2021-05-28
+### Added
+- Scroll Image View as a component
+- Styling for Submit Button
+### Fixed
+- Error:
+    ```java
+    client:135 (...)\fesm2015\ngx-translate-messageformat-compiler.js depends on 'messageformat'. CommonJS or AMD dependencies can cause optimization bailouts.
+    ```
+- Added constraint to the maximum scroll-depth down for an image _(now: can't go below `scale(0.2)`)_
+### Changed
+- Adjusted color contrast for muted text
+- Matched the color and adjusted font formatting for invalid message information in the field form
+
+## [[0.7.1]] - 2021-05-28
+### Tweaked
+- Constraints for reply fields
+
+## [[0.7.0]] - 2021-05-28
+### Added
+- Error Handling
+    - Error Modal View
+    - Error Displays
+
 ## [[0.6.0]] - 2021-05-23
 ### Added
 - Image Features:
@@ -74,18 +98,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Removed unused imports
     - Missed one semicolon
 
-## [0.0.2] - 2021-04-27
+## [[0.0.2]] - 2021-04-27
 ### Added
 - Bootstrap was added to the project
 - The project structure on the frontend side has been created
 
 
-## [0.0.1] - 2021-04-23
+## [[0.0.1]] - 2021-04-23
 ### Project Initialization.
 ### Added
 - `README.md`
 
 
+[0.8.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.8.0
+[0.7.1]: https://github.com/Luzkan/Polichan/releases/tag/v0.7.1
+[0.7.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.7.0
 [0.6.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.6.0
 [0.5.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.5.0
 [0.4.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.4.0

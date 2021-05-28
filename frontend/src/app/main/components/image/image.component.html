@@ -1,0 +1,10 @@
+<img class="post-image d-flex align-self-start rounded mr-3 avatar-sm img-fluid"
+     [src]="imgUrl" (click)="show()" alt="Image Preview">
+
+<div [style.display]="showModal ? 'block' : 'none'" class="modal modal-full-image" id="imagemodal" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="transform: scale(1.0)" cdkDrag>
+  <div class="enlarged-image" (wheel)="onScroll($event)">
+    <img [src]="imgUrl" alt="Full View Image">
+    <button type="button" class="btn btn-default close-button" data-dismiss="modal" (click)="hide()">X</button>
+  </div>
+</div>

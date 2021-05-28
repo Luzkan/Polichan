@@ -31,7 +31,9 @@
         <div class="custom-file">
           <input id="customFile" type="file" class="custom-file-input"
                  (change)="onFileChange($event)" (focus)="fileInputTouched()">
+
           <label class="custom-file-label" for="customFile">{{ 'EntryForm.Label.Image' | translate }}</label>
+          <button class="submit-button" type="submit" [disabled]="getFormGroup().invalid">{{ 'EntryForm.Submit' | translate }}</button>
           <p class="validation-msg"
              [class.d-none]="!isErrorVisible('imageFile')">{{ "ReplyForm.InvalidValue" | translate }}</p>
           <div class="m-1 upload">
@@ -42,7 +44,7 @@
             </ul>
           </div>
         </div>
-        <button type="submit" [disabled]="getFormGroup().invalid">{{ 'EntryForm.Submit' | translate }}</button>
+
       </form>
     </div>
   </div>

@@ -9,8 +9,9 @@
       </p>
     </div>
     <div class="media mb-4">
-      <img *ngIf="post.imgUrl" class="post-image d-flex align-self-start rounded mr-3 avatar-sm img-fluid"
-           [src]="post.imgUrl" alt="Jakiś Obrazaczek">
+      <app-image [imgUrl]="post.imgUrl"> </app-image>
+<!--      <img *ngIf="post.imgUrl" class="post-image d-flex align-self-start rounded mr-3 avatar-sm img-fluid"-->
+<!--           [src]="post.imgUrl" alt="Jakiś Obrazaczek">-->
       <div class="post-text media-body">
         <p>{{post.content}}</p>
       </div>
