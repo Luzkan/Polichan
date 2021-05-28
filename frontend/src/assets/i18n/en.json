@@ -26,6 +26,7 @@
   "EntryForm.Submit": "Submit",
 
   "ReplyForm.InvalidValue": "Invalid value",
+  "ReplyForm.LengthValidationError": "Field cannot be blank (max {length} characters)",
 
   "Header.Navbar.Item.Arch": "arch",
   "Header.Navbar.Item.Bio": "bio",
@@ -50,6 +51,7 @@
   "Modal.Error.Default.Message": "Sorry, something went wrong!",
 
   "Thread.LoadNextPage": "Load next page",
+
   "ThreadsBoard.ThreadDetails": "Check details",
   "ThreadsBoard.ShowLastPosts": "Show last posts",
   "ThreadsBoard.HideLastPosts": "Hide last posts"

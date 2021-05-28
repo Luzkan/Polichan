@@ -42,13 +42,15 @@ export class EntryFormComponent extends AbstractCleanable implements OnInit {
 
   ngOnInit(): void {
     const fileValidators = [this.createFileValidator()];
+    const standardValidators = [Validators.required, this.createNoWhitespaceValidator(), Validators.maxLength(32)];
+    const contentValidators = [Validators.required, this.createNoWhitespaceValidator(), Validators.maxLength(4096)];
     if (this.imageRequired) {
       fileValidators.push(Validators.required);
     }
     this.replyFormGroup = this.formBuilder.group({
-      nickname: new FormControl('', [Validators.required, this.createNoWhitespaceValidator()]),
-      password: new FormControl('', [Validators.required, this.createNoWhitespaceValidator()]),
-      content: new FormControl('', [Validators.required, this.createNoWhitespaceValidator()]),
+      nickname: new FormControl('', standardValidators),
+      password: new FormControl('', standardValidators),
+      content: new FormControl('', contentValidators),
       imageFile: new FormControl(undefined, fileValidators),
     });
   }
