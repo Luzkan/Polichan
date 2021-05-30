@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Now `Polichan` in navbar navigates to the mainpage
 ### Tweaked
 - Now ID of Threads have golden colour to distinguish them from Post IDs
+- Bottom margin of the board name title
 ### Fixed
 - Now `ImageFullView` will not catch mouse input in the huge box area around it
 - Now file input changes inner text to the path of selected file for upload.
