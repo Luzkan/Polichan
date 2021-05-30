@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [[0.8.1]] - 2021-05-30
 ### Added
-- Styled href shadows on hover
+- Styled `href` shadows on hover
+- Styled _Load More_ element
 ### Tweaked
 - Now ID of Threads have golden colour to distinguish them from Post IDs
 ### Fixed
