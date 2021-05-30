@@ -35,6 +35,7 @@ export class ThreadService extends BaseApiService {
 
   getRandomThreads(pageable?: Pageable): Observable<Thread[]> {
     const queryParams: Dictionary<string> = {};
+    this.setOptionalEntry(queryParams, 'random', 'true');
     this.setPageableParams(queryParams, pageable);
     return this.apiService.get<Thread[]>(ApiPatternKey.THREADS);
   }

@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {PostComponent} from './post.component';
-import {HttpClient} from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {ErrorModalComponent} from './error-modal.component';
+import {BsModalRef, ModalModule} from 'ngx-bootstrap/modal';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateModuleConfig} from '@ngx-translate/core/public_api';
 import {TranslateCompiler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -24,26 +24,26 @@ const translationConfig: TranslateModuleConfig = {
   },
 };
 
-describe('PostComponent', () => {
-  let component: PostComponent;
-  let fixture: ComponentFixture<PostComponent>;
-
+describe('ErrorModalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PostComponent],
+      declarations: [
+        ErrorModalComponent,
+      ],
+      providers: [
+        BsModalRef,
+      ],
       imports: [
+        HttpClientModule,
+        ModalModule.forRoot(),
         TranslateModule.forRoot(translationConfig),
       ],
     }).compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PostComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(ErrorModalComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

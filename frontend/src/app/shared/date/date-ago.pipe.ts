@@ -7,17 +7,17 @@ import {Observable, of} from 'rxjs';
   pure: true,
 })
 export class DateAgoPipe implements PipeTransform {
-  constructor(private readonly translateService: TranslateService ) {}
-
+  constructor(private readonly translateService: TranslateService) {
+  }
 
   static INTERVALS = {
-    'year': 365 * 24 * 60 * 60,
-    'month': 30 * 24 * 60 * 60,
-    'week': 7 * 24 * 60 * 60,
-    'day': 24 * 60 * 60,
-    'hour': 60 * 60,
-    'minute': 60,
-    'second': 1,
+    'DateAgo.Ago.Year': 365 * 24 * 60 * 60,
+    'DateAgo.Ago.Month': 30 * 24 * 60 * 60,
+    'DateAgo.Ago.Week': 7 * 24 * 60 * 60,
+    'DateAgo.Ago.Day': 24 * 60 * 60,
+    'DateAgo.Ago.Hour': 60 * 60,
+    'DateAgo.Ago.Minute': 60,
+    'DateAgo.Ago.Second': 1,
   };
 
   transform(value: Date | string | number): Observable<string> {
@@ -26,10 +26,10 @@ export class DateAgoPipe implements PipeTransform {
       return this.translateService.stream('DateAgo.Now');
     }
 
-    for (const [unit, value] of Object.entries(DateAgoPipe.INTERVALS)) {
+    for (const [key, value] of Object.entries(DateAgoPipe.INTERVALS)) {
       const counter = Math.floor(seconds / value);
       if (counter > 0) {
-        return this.translateService.stream('DateAgo.Ago', {count: counter, unit: unit});
+        return this.translateService.stream(key, {count: counter});
       }
     }
     return of(value.toString());

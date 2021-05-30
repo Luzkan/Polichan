@@ -36,7 +36,7 @@ const routes: Routes = [
     component: ThreadComponent,
     pathMatch: 'full',
     resolve: {
-      threadId: ThreadResolver,
+      thread: ThreadResolver,
     },
   },
   {

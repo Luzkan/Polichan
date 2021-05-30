@@ -6,7 +6,6 @@ import {AppComponent} from './components/app.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {HeaderComponent} from './components/header/header.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {TestComponent} from './components/test/test.component';
 import {PostComponent} from './components/post/post.component';
 import {EntryFormComponent} from './components/reply/entry-form.component';
 import {NgSelectModule} from '@ng-select/ng-select';
@@ -54,7 +53,6 @@ const translationConfig: TranslateModuleConfig = {
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    TestComponent,
     PostComponent,
     EntryFormComponent,
     ThreadComponent,
