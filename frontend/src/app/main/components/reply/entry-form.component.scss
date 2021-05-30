@@ -32,6 +32,14 @@ label {
   width: 80%;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  -webkit-box-shadow: 0 0 0 30px $background-secondary-color inset;
+  -webkit-text-fill-color: $primary-color !important;
+}
+
 input, input:focus, textarea, textarea:focus, .custom-file-label {
   background-color: $background-secondary-color;
   color: $primary-color;

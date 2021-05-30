@@ -21,7 +21,8 @@ type Options = { params: Dictionary<string>, headers: Dictionary<string> };
   providedIn: 'root',
 })
 export class InMemoryDataService {
-  private static readonly ImageURL = 'assets/images/obrazek1.jpg';
+  private static readonly ImagePostURL = 'assets/images/obrazek2.jpg';
+  private static readonly ImageThreadURL = 'assets/images/obrazek1.jpg';
   private database: Dictionary<any> = {};
   private readonly paramReducer: PipeReducer<any, any>;
   private readonly headerReducer: PipeReducer<any, any>;
@@ -82,7 +83,7 @@ export class InMemoryDataService {
       nickname: postData.nickname,
       content: postData.content,
       date: faker.date.past(2),
-      imgUrl: InMemoryDataService.ImageURL,
+      imgUrl: InMemoryDataService.ImagePostURL,
     };
 
     const postsPath = this.prepareUrl(ApiPatternKey.POSTS);
@@ -95,7 +96,7 @@ export class InMemoryDataService {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private saveImage(post: FormData): ImageResource {
-    return {id: '1', imgUrl: InMemoryDataService.ImageURL};
+    return {id: '1', imgUrl: ''};
   }
 
   private saveThread(threadData: ThreadFormData): Thread {
@@ -105,7 +106,7 @@ export class InMemoryDataService {
       nickname: threadData.nickname,
       content: threadData.content,
       date: faker.date.past(2),
-      imgUrl: InMemoryDataService.ImageURL,
+      imgUrl: InMemoryDataService.ImageThreadURL,
     };
     const path = this.prepareUrl(ApiPatternKey.THREADS);
     this.saveInArray(path, thread);
