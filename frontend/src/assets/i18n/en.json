@@ -14,7 +14,13 @@
   "Board.Title.Poli": "/poli/ - Politechnika",
   "Board.Title.Random": "/random/ - Tematy Przeróżne",
 
-  "DateAgo.Ago": "{count} {unit}{count, plural, one{} other{s}} ago",
+  "DateAgo.Ago.Second": "{count} {count, plural, one{second} other{seconds}} ago",
+  "DateAgo.Ago.Minute": "{count} {count, plural, one{minute} other{minutes}} ago",
+  "DateAgo.Ago.Hour": "{count} {count, plural, one{hour} other{hours}} ago",
+  "DateAgo.Ago.Day": "{count} {count, plural, one{day} other{days}} ago",
+  "DateAgo.Ago.Week": "{count} {count, plural, one{week} other{weeks}} ago",
+  "DateAgo.Ago.Month": "{count} {count, plural, one{month} other{months}} ago",
+  "DateAgo.Ago.Year": "{count} {count, plural, one{year} other{years}} ago",
   "DateAgo.Now": "Just now",
 
   "EntryForm.Label.Nickname": "Nickname",

@@ -1,11 +1,15 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PostComponent} from './post.component';
-import {HttpClient} from '@angular/common/http';
+import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
+import {ThreadService} from '../../services/thread.service';
+import {ChangeDetectorRef} from '@angular/core';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateCompiler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateModuleConfig} from '@ngx-translate/core/public_api';
-import {TranslateCompiler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateMessageFormatCompiler} from 'ngx-translate-messageformat-compiler';
+import {RandomBoardComponent} from './random-board.component';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -24,21 +28,28 @@ const translationConfig: TranslateModuleConfig = {
   },
 };
 
-describe('PostComponent', () => {
-  let component: PostComponent;
-  let fixture: ComponentFixture<PostComponent>;
+describe('RandomBoardComponent', () => {
+  let component: RandomBoardComponent;
+  let fixture: ComponentFixture<RandomBoardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PostComponent],
+      declarations: [RandomBoardComponent],
+      providers: [
+        ThreadService,
+        BsModalService,
+        ChangeDetectorRef,
+      ],
       imports: [
+        ModalModule.forRoot(),
+        HttpClientModule,
         TranslateModule.forRoot(translationConfig),
       ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PostComponent);
+    fixture = TestBed.createComponent(RandomBoardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

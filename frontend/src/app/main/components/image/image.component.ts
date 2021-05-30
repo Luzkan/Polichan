@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-image',
@@ -6,12 +6,7 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
   styleUrls: ['./image.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class ImageComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ImageComponent {
   @Input()
   imgUrl: String | undefined
 
@@ -34,8 +29,6 @@ export class ImageComponent implements OnInit {
 
     const matches = targetStyle.transform.match(scalePattern);
     let scaleValue = parseFloat(matches[0].match(parenthesesPattern)[1]);
-
-    console.log('xD');
 
     if (event.deltaY < 0) {
       scaleValue += 0.1;

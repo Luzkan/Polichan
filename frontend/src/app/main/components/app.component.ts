@@ -7,6 +7,5 @@ import {PRIMARY_SPINNER_NAME} from '../../core/spinner/spinner-controller.servic
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'notice-board';
   spinnerName = PRIMARY_SPINNER_NAME;
 }
