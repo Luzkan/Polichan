@@ -12,3 +12,9 @@
 a {
   color: $accent-color;
 }
+
+.nav-options {
+  // This could be hidden until the time when extra features that make use of this
+  // button are implemented. For now though, main page looks more aesthetic with it.
+  // display: none;
+}
