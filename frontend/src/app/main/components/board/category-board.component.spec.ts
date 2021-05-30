@@ -1,17 +1,22 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {BoardThreadComponent} from './board-thread.component';
-import {CategoryBoardComponent} from '../category-board.component';
 import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
+import {ThreadService} from '../../services/thread.service';
 import {ChangeDetectorRef} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateCompiler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateModuleConfig} from '@ngx-translate/core/public_api';
 import {TranslateMessageFormatCompiler} from 'ngx-translate-messageformat-compiler';
-import {HttpLoaderFactory} from '../category-board.component.spec';
-import {PostService} from '../../../services/post.service';
-import {Thread} from '../../../models/thread.model';
-import {ThreadCategory} from '../../../models/thread-category.model';
+import {CategoryBoardComponent} from './category-board.component';
+import {ActivatedRoute} from '@angular/router';
+import {of} from 'rxjs';
+import {ThreadCategory} from '../../models/thread-category.model';
+
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 const translationConfig: TranslateModuleConfig = {
   defaultLanguage: 'en',
@@ -26,37 +31,35 @@ const translationConfig: TranslateModuleConfig = {
   },
 };
 
-describe('BoardThreadComponent', () => {
-  let component: BoardThreadComponent;
-  let fixture: ComponentFixture<BoardThreadComponent>;
+describe('CategoryBoardComponent', () => {
+  let component: CategoryBoardComponent;
+  let fixture: ComponentFixture<CategoryBoardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CategoryBoardComponent],
       providers: [
-        PostService,
+        ThreadService,
         BsModalService,
         ChangeDetectorRef,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            data: of({categoryId: ThreadCategory.BIO}),
+          },
+        },
       ],
       imports: [
-        HttpClientModule,
         ModalModule.forRoot(),
+        HttpClientModule,
         TranslateModule.forRoot(translationConfig),
       ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoardThreadComponent);
+    fixture = TestBed.createComponent(CategoryBoardComponent);
     component = fixture.componentInstance;
-    component.thread = {
-      id: '1',
-      category: ThreadCategory.BIO,
-      nickname: 'Mike',
-      content: 'Lorem ipsum',
-      imgUrl: '',
-      date: new Date(),
-    } as Thread;
     fixture.detectChanges();
   });
 

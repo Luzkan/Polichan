@@ -40,7 +40,7 @@ export class ThreadComponent extends AbstractCleanable implements OnInit {
               private readonly modalService: BsModalService,
               private readonly postService: PostService) {
     super();
-    this.threadSource = this.route.data.pipe(map((data) => data.threadId), shareReplay(1));
+    this.threadSource = this.route.data.pipe(map((data) => data.thread), shareReplay(1));
   }
 
 

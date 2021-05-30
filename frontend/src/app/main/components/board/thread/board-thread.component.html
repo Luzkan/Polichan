@@ -13,8 +13,9 @@
           </p>
         </div>
         <div class="media mb-4 hidden thread-content">
-          <img class="post-image d-flex align-self-start rounded mr-3 avatar-sm img-fluid"
-               [src]="thread.imgUrl" alt="Jakiś Obrazeczek">
+          <!-- Full Image Preview after Click  -->
+          <app-image [imgUrl]="thread.imgUrl"></app-image>
+
           <div class="post-text media-body">
             <p>{{ thread.content }}</p>
           </div>
