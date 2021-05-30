@@ -1,11 +1,9 @@
 import {
   ChangeDetectorRef,
   Component,
-  ElementRef,
   Input,
   OnInit,
   Output,
-  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import {Optional} from '../../../core/types/optional.model';
@@ -29,15 +27,14 @@ import {isNil} from 'lodash-es';
   styleUrls: ['./entry-form.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-
 export class EntryFormComponent extends AbstractCleanable implements OnInit {
-  @ViewChild('customFileLabel', {static: false}) public fileLabel: ElementRef | undefined;
-
   @Input()
   imageRequired = true;
 
   @Output()
   entrySubmitted = new EventEmitter<EntryFormData>();
+
+  imageUrl: Optional<string>;
 
   replyFormGroup: Optional<FormGroup>;
 
@@ -97,14 +94,12 @@ export class EntryFormComponent extends AbstractCleanable implements OnInit {
   }
 
   onFileChange(event: any) {
+    const file = event.target?.files?.[0];
+    this.imageUrl = file?.name;
     this.getFormGroup().patchValue({
-      imageFile: event.target?.files?.[0],
+      imageFile: file,
     });
     this.markForCheck();
-
-    if (this.fileLabel) {
-      this.fileLabel.nativeElement.innerHTML = event.target.value;
-    }
   }
 
   markForCheck(): void {
