@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Styled `href` shadows on hover
 - Styled _Load More_ element
 - Customised Scrollbar
+- Added very subtle border for posts
 ### Tweaked
 - Now ID of Threads have golden colour to distinguish them from Post IDs
 ### Fixed
