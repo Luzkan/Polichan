@@ -4,10 +4,6 @@
   font-weight: bold;
 }
 
-.post-badge {
-
-}
-
 .post-date-time {
   font-style: italic;
   font-weight: lighter;
@@ -15,6 +11,7 @@
 
 .post-id {
   font-weight: normal;
+  color: $color-thread-id;
 }
 
 .post-image {

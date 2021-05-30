@@ -1,4 +1,13 @@
-import {ChangeDetectorRef, Component, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import {Optional} from '../../../core/types/optional.model';
 import {
   AbstractControl,
@@ -22,6 +31,8 @@ import {isNil} from 'lodash-es';
 })
 
 export class EntryFormComponent extends AbstractCleanable implements OnInit {
+  @ViewChild('customFileLabel', {static: false}) public fileLabel: ElementRef | undefined;
+
   @Input()
   imageRequired = true;
 
@@ -90,6 +101,10 @@ export class EntryFormComponent extends AbstractCleanable implements OnInit {
       imageFile: event.target?.files?.[0],
     });
     this.markForCheck();
+
+    if (this.fileLabel) {
+      this.fileLabel.nativeElement.innerHTML = event.target.value;
+    }
   }
 
   markForCheck(): void {
