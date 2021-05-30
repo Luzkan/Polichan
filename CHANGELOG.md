@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Now `ImageFullView` will not catch mouse input in the huge box area around it
 - Now file input changes inner text to the path of selected file for upload.
+- Now thread image after entering a thread can be enlarged
 
 ## [[0.8.0]] - 2021-05-28
 ### Added
