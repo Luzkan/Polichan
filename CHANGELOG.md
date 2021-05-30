@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [[0.8.1]] - 2021-05-30
+### Tweaked
+- Now ID of Threads have golden colour to distinguish them from Post IDs
 ### Fixed
 - Now `ImageFullView` will not catch mouse input in the huge box area around it
 - Now file input changes inner text to the path of selected file for upload.

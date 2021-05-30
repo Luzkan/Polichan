@@ -97,7 +97,6 @@ export class EntryFormComponent extends AbstractCleanable implements OnInit {
   }
 
   onFileChange(event: any) {
-    console.log("halo")
     this.getFormGroup().patchValue({
       imageFile: event.target?.files?.[0],
     });
