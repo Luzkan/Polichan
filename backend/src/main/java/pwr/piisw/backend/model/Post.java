@@ -14,7 +14,7 @@ public class Post implements Serializable {
     @Id
     @GeneratedValue
     @Column(nullable = false, updatable = false)
-    private String id;
+    private Integer id;
     @Column(nullable = false, updatable = false)
     private String threadId;
     private String nickname;

@@ -5,6 +5,6 @@ import pwr.piisw.backend.model.Thread;
 
 import java.util.Optional;
 
-public interface ThreadRepo extends JpaRepository<Thread, String> {
+public interface ThreadRepo extends JpaRepository<Thread, Integer> {
 
 }

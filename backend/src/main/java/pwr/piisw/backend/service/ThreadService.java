@@ -6,6 +6,7 @@ import pwr.piisw.backend.exception.ThreadNotFoundException;
 import pwr.piisw.backend.model.Thread;
 import pwr.piisw.backend.repo.ThreadRepo;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,14 +19,12 @@ public class ThreadService {
         this.threadRepo = threadRepo;
     }
 
-    //podstawa szkieletu
-
     public Thread saveThread(Thread thread){
-        thread.setContent("content");
+        thread.setDate(LocalDateTime.now());
         return threadRepo.save(thread);
     }
 
-    public Thread getThread(String threadId){
+    public Thread getThread(Integer threadId){
         return threadRepo.findById(threadId)
                 .orElseThrow(()-> new ThreadNotFoundException("Post by id" + threadId + "was not found"));
     }

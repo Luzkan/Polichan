@@ -17,7 +17,7 @@ public class Thread implements Serializable {
     @Id
     @GeneratedValue
     @Column(nullable = false, updatable = false)
-    private String id;
+    private Integer id;
 
     private ThreadCategory category;
     private String nickname;

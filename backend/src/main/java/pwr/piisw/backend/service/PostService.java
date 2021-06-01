@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pwr.piisw.backend.model.Post;
 import pwr.piisw.backend.repo.PostRepo;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,11 +18,15 @@ public class PostService {
     }
 
     public Post savePost(Post post){
-        post.setContent("content");
+        post.setDate(LocalDateTime.now());
         return postRepo.save(post);
     }
 
-    public List<Post>  getPosts(String threadId){
+    public List<Post>  getPostsById(int threadId){
         return postRepo.findAllBythreadId(threadId);
+    }
+
+    public List<Post>  getPosts(){
+        return postRepo.findAll();
     }
 }
