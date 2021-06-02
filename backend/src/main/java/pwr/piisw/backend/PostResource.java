@@ -25,13 +25,13 @@ public class PostResource {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-    @GetMapping("/posts")
-    public ResponseEntity<List<Post>> getAllPosts() {
-        List<Post> posts = postService.getPosts();
-        return new ResponseEntity<>(posts, HttpStatus.OK);
-    }
+   // @GetMapping("/posts")
+    //public ResponseEntity<List<Post>> getAllPosts() {
+      //  List<Post> posts = postService.getPosts();
+        //return new ResponseEntity<>(posts, HttpStatus.OK);
+   // }
 
-    @PostMapping("/savePost")
+    @PostMapping("/posts")
     public ResponseEntity<Post> addPost(@RequestBody Post post) {
         Post newPost = postService.savePost(post);
         return new ResponseEntity<>(newPost, HttpStatus.CREATED);

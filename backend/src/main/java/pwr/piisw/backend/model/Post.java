@@ -18,6 +18,7 @@ public class Post implements Serializable {
     @Column(nullable = false, updatable = false)
     private String threadId;
     private String nickname;
+    private String password;
     private String content;
     private String imgUrl;
     private LocalDateTime date;
@@ -29,6 +30,7 @@ public class Post implements Serializable {
                 "id='" + id + '\'' +
                 ", threadId='" + threadId + '\'' +
                 ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
                 ", content='" + content + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", date=" + date +

@@ -21,6 +21,7 @@ public class Thread implements Serializable {
 
     private ThreadCategory category;
     private String nickname;
+    private String password;
     private String content;
     private String imgUrl;
     private LocalDateTime date;
@@ -31,6 +32,7 @@ public class Thread implements Serializable {
                 "id='" + id + '\'' +
                 ", category=" + category +
                 ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
                 ", content='" + content + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", date=" + date +
