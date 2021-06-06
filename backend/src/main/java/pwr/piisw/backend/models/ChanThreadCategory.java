@@ -1,8 +1,8 @@
-package pwr.piisw.backend.model;
+package pwr.piisw.backend.models;
 
-public enum ThreadCategory {
+public enum ChanThreadCategory {
     IT,
-    MATH ,
+    MATH,
     MED,
     BIO,
     CHEM,
