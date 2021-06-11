@@ -22,11 +22,7 @@ public class PostResource {
   // get posts for thread of given id
   @GetMapping("/threads/{id}/posts")
   public ResponseEntity<Page<Post>> getPosts(PostPage postPage, @PathVariable("id") int id) {
-
-    System.out.println("hello there");
     Page posts = postService.getPosts(postPage, id);
-    //Page posts = postService.getPosts(postPage);
-
     return new ResponseEntity<>(posts, HttpStatus.OK);
   }
 

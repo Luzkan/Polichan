@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import pwr.piisw.backend.helper.FileUploadHelper;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class FileUploadResource {
@@ -21,19 +24,18 @@ public class FileUploadResource {
     public ResponseEntity<String> uploadFile(@RequestParam("file")MultipartFile file){
 
         try {
-
             if (file.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Request file");
             }
 
-            if (!(file.getContentType().equals("image/jpeg") && file.getContentType().equals("image/png") && file.getContentType().equals("image/gif"))) {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("Only jpeg, jpg, png, gif");
+            List<String> types = Arrays.asList("image/png", "image/jpeg", "image/gif");
+            if (!types.contains(file.getContentType())) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Only jpeg, jpg, png, gif");
             }
 
-            boolean f = fileUploadHelper.uploadFile(file);
-            if (f) {
-                return ResponseEntity.ok("File is successfully uploaded");
+            String response = fileUploadHelper.uploadFile(file);
+            if (!response.isEmpty()) {
+                return ResponseEntity.ok(response);
             }
         }
         catch (Exception e) {

@@ -1,9 +1,12 @@
 package pwr.piisw.backend.controller;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pwr.piisw.backend.models.ChanThread;
+import pwr.piisw.backend.models.ChanThreadPage;
 import pwr.piisw.backend.services.ChanThreadService;
 
 @RestController
@@ -26,4 +29,14 @@ public class ChanThreadResource {
         return new ResponseEntity<>(chanThread, HttpStatus.OK);
     }
 
+    @GetMapping("threads")
+    public ResponseEntity<Page<ChanThread>> getAllChanThread(ChanThreadPage chanThreadPage, @RequestParam(required = false) boolean random) {
+        if (random) {
+            Page randomChanThreads = chanThreadService.getRandomChanThreads(chanThreadPage);
+            return new ResponseEntity<>(randomChanThreads, HttpStatus.OK);
+        } else {
+            Page allChanThreads = chanThreadService.getAllChanThreads(chanThreadPage);
+            return new ResponseEntity<>(allChanThreads, HttpStatus.OK);
+        }
+    }
 }
