@@ -1,4 +1,11 @@
-import {ChangeDetectorRef, Component, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import {Optional} from '../../../core/types/optional.model';
 import {
   AbstractControl,
@@ -20,13 +27,14 @@ import {isNil} from 'lodash-es';
   styleUrls: ['./entry-form.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-
 export class EntryFormComponent extends AbstractCleanable implements OnInit {
   @Input()
   imageRequired = true;
 
   @Output()
   entrySubmitted = new EventEmitter<EntryFormData>();
+
+  imageUrl: Optional<string>;
 
   replyFormGroup: Optional<FormGroup>;
 
@@ -35,15 +43,22 @@ export class EntryFormComponent extends AbstractCleanable implements OnInit {
     super();
   }
 
+  isErrorVisible(controlName: string): boolean {
+    const ctrl = this.replyFormGroup?.get(controlName) as FormControl;
+    return isNil(ctrl) ? false : (ctrl.touched || ctrl.dirty) && ctrl.invalid;
+  }
+
   ngOnInit(): void {
     const fileValidators = [this.createFileValidator()];
+    const standardValidators = [Validators.required, this.createNoWhitespaceValidator(), Validators.maxLength(32)];
+    const contentValidators = [Validators.required, this.createNoWhitespaceValidator(), Validators.maxLength(4096)];
     if (this.imageRequired) {
       fileValidators.push(Validators.required);
     }
     this.replyFormGroup = this.formBuilder.group({
-      nickname: new FormControl('', [Validators.required, this.createNoWhitespaceValidator()]),
-      password: new FormControl('', [Validators.required, this.createNoWhitespaceValidator()]),
-      content: new FormControl('', [Validators.required, this.createNoWhitespaceValidator()]),
+      nickname: new FormControl('', standardValidators),
+      password: new FormControl('', standardValidators),
+      content: new FormControl('', contentValidators),
       imageFile: new FormControl(undefined, fileValidators),
     });
   }
@@ -79,13 +94,19 @@ export class EntryFormComponent extends AbstractCleanable implements OnInit {
   }
 
   onFileChange(event: any) {
+    const file = event.target?.files?.[0];
+    this.imageUrl = file?.name;
     this.getFormGroup().patchValue({
-      imageFile: event.target?.files?.[0],
+      imageFile: file,
     });
     this.markForCheck();
   }
 
   markForCheck(): void {
     this.changeDetector.markForCheck();
+  }
+
+  fileInputTouched() {
+    this.getFormGroup().get('imageFile')?.markAsTouched();
   }
 }

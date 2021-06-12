@@ -7,34 +7,35 @@
                  class="col-md-3 col-form-label">{{ 'EntryForm.Label.Nickname' | translate }}</label>
 
           <div class="col-md-9">
-            <input formControlName="nickname" class="form-control form-control-sm" type="text" value=""
-                   id="nickname-input">
+            <input formControlName="nickname" class="form-control form-control-sm" type="text" id="nickname-input">
+            <p class="validation-msg"
+               [class.d-none]="!isErrorVisible('nickname')">{{ "ReplyForm.LengthValidationError" | translate: {length: 32} }}</p>
           </div>
-
-          <!--          <div class="mb-3">-->
-          <!--            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>-->
-          <!--            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>-->
-          <!--          </div>-->
-
-          <!--          <ckeditor [editor]="Editor" data="<p>Content of the editor.</p>"></ckeditor>-->
-
           <label for="password-input"
                  class="col-md-3 col-form-label">{{ 'EntryForm.Label.Password' | translate }}</label>
           <div class="col-md-9">
-            <input formControlName="password" class="form-control form-control-sm" type="password" value=""
-                   id="password-input">
+            <input formControlName="password" class="form-control form-control-sm" type="password" id="password-input">
+            <p class="validation-msg"
+               [class.d-none]="!isErrorVisible('password')">{{ "ReplyForm.LengthValidationError" | translate: {length: 32} }}</p>
           </div>
 
           <label for="text-body-input" class="col-md-3 col-form-label">{{ 'EntryForm.Label.Text' | translate }}</label>
           <div class="col-md-9">
             <textarea formControlName="content" class="form-control form-control-sm" id="text-body-input" rows="4">
             </textarea>
+            <p class="validation-msg"
+               [class.d-none]="!isErrorVisible('content')">{{ "ReplyForm.LengthValidationError" | translate: {length: 4096} }}</p>
           </div>
         </div>
 
         <div class="custom-file">
-          <input id="customFile" type="file" class="custom-file-input" (change)="onFileChange($event)">
-          <label class="custom-file-label" for="customFile">{{ 'EntryForm.Label.Image' | translate }}</label>
+          <input id="customFile" type="file" class="custom-file-input" (change)="onFileChange($event)" (focus)="fileInputTouched()">
+
+          <label id="customFileLabel" class="custom-file-label"
+                 for="customFile">{{ imageUrl ? imageUrl : ('EntryForm.Label.Image' | translate) }}</label>
+          <button class="submit-button" type="submit" [disabled]="getFormGroup().invalid">{{ 'EntryForm.Submit' | translate }}</button>
+          <p class="validation-msg"
+             [class.d-none]="!isErrorVisible('imageFile')">{{ "ReplyForm.InvalidValue" | translate }}</p>
           <div class="m-1 upload">
             <ul>
               <li>{{ 'EntryForm.Image.SupportedTypes' | translate }}: <code>.jpg</code>, <code>.png</code>,
@@ -43,7 +44,7 @@
             </ul>
           </div>
         </div>
-        <button type="submit" [disabled]="getFormGroup().invalid">{{ 'EntryForm.Submit' | translate }}</button>
+
       </form>
     </div>
   </div>

@@ -6,15 +6,15 @@
           <p class='no-margin'>
             <span class="post-nickname">Anonymous</span>
             <span class="post-badge badge badge-danger ml-1">{{ thread.nickname }}</span> |
-            <span class="post-date-time">{{ thread.date | dateAgo }}</span> |
+            <span class="post-date-time">{{ thread.date | dateAgo | async }}</span> |
             <span class="post-id"><a>{{ thread.id }}</a></span> |
             <span class="post-collapse" (click)="toggleShowThread()"><a>{{ threadIsShown ? '[–]' : '[+]'}}</a></span>
             <span class="post-hidden-preview-content"> | {{thread.content.substring(0, 50)}}...</span>
           </p>
         </div>
         <div class="media mb-4 hidden thread-content">
-          <img class="post-image d-flex align-self-start rounded mr-3 avatar-sm img-fluid"
-               [src]="thread.imgUrl" alt="Jakiś Obrazeczek">
+          <!-- Full Image Preview after Click  -->
+          <app-image [imgUrl]="thread.imgUrl"></app-image>
           <div class="post-text media-body">
             <p>{{ thread.content }}</p>
           </div>

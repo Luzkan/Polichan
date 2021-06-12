@@ -25,7 +25,8 @@
           "options": {
             "allowedCommonJsDependencies": [
               "faker",
-              "lodash"
+              "lodash",
+              "messageformat"
             ],
             "outputPath": "dist/notice-board",
             "index": "src/index.html",
@@ -102,7 +103,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/styles.scss"
             ],
             "scripts": []
           }

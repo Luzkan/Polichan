@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router} from '@angular/router';
 import {Thread} from '../models/thread.model';
 import {ThreadService} from './thread.service';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {catchError, mergeMap} from 'rxjs/operators';
+import {Observable, of, throwError} from 'rxjs';
 import {isNil} from 'lodash-es';
 
 @Injectable({
@@ -17,11 +17,10 @@ export class ThreadResolver implements Resolve<Thread> {
   resolve(route: ActivatedRouteSnapshot): Observable<Thread> {
     const id = route.params.id;
     return this.threadService.getThread(id).pipe(
-        map((e) => {
-          if (isNil(e)) {
-            this.router.navigate(['/']).then();
-          }
-          return e;
+        mergeMap((e) => isNil(e) ? throwError('No data'): of(e)),
+        catchError((error) => {
+          this.router.navigate(['/']).then();
+          return throwError(error);
         }),
     );
   }

@@ -24,8 +24,20 @@ label {
   font-size: larger;
 }
 
-.form-control, .custom-file-input {
+.form-control, {
   width: 100%;
+}
+
+.custom-file-label, .custom-file-input {
+  width: 80%;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  -webkit-box-shadow: 0 0 0 30px $background-secondary-color inset;
+  -webkit-text-fill-color: $primary-color !important;
 }
 
 input, input:focus, textarea, textarea:focus, .custom-file-label {
@@ -54,3 +66,27 @@ input:target, textarea:target {
 .custom-file-input::after {
   color: red;
 }
+
+.validation-msg {
+  margin: 4px 0 8px;
+  font-size: 55%;
+  color: #e83e8c;
+  word-wrap: break-word;
+}
+
+
+.submit-button{
+  border: 1px solid #ced4da;
+  background-color: $background-secondary-color;
+  color: $primary-color;
+  height: inherit;
+  width: 108px;
+  margin-left: 10px;
+}
+
+.submit-button > button:disabled, button[disabled]{
+  background-color: $disabled-color;
+  border-color: $muted-color;
+}
+
+

@@ -1,6 +1,5 @@
-<div class="container">
+<div class="container" id="test">
   <app-entry-form *ngIf="thread" [imageRequired]="false" (entrySubmitted)="savePost($event)"></app-entry-form>
-
   <div class="row thread-mainpage" *ngIf="thread && posts">
     <div class="thread">
       <div class="post-card card">
@@ -9,25 +8,26 @@
             <p>
               <span class="post-nickname">Anonymous</span>
               <span class="post-badge badge badge-danger ml-1">{{ thread.nickname }}</span> |
-              <span class="post-date-time">{{ thread.date | dateAgo }}</span> |
-              <span class="post-id"><a>{{ thread.id }}</a></span>
+              <span class="post-date-time">{{ thread.date | dateAgo | async }}</span>
             </p>
           </div>
           <div class="media mb-4 hidden">
-            <img class="post-image d-flex align-self-start rounded mr-3 avatar-sm img-fluid"
-                 [src]="thread.imgUrl" alt="Jakiś Obrazeczek">
+
+            <!-- Full Image Preview after Click  -->
+            <app-image [imgUrl]="thread.imgUrl"> </app-image>
+
             <div class="post-text media-body">
               <p>{{ thread.content }}</p>
             </div>
           </div>
-          <!--        <div>-->
-          <!--          <p class="post-information-hidden" *ngIf="!postsInThreadAreShown">-->
-          <!--            &lt;!&ndash; TODO: This should tell the numbers of posts in thread. &ndash;&gt;-->
-          <!--            <span id="posts-omitted-number">6</span> replies and-->
-          <!--            &lt;!&ndash; TODO: This should tell the numbers of posts in thread with pictures. &ndash;&gt;-->
-          <!--            <span id="pictures-omitted-number">3</span> pictures omitted.-->
-          <!--          </p>-->
-          <!--        </div>-->
+<!--          <div>-->
+<!--            <p class="post-information-hidden" *ngIf="!postsInThreadAreShown">-->
+<!--              &lt;!&ndash; TODO: This should tell the numbers of posts in thread. &ndash;&gt;-->
+<!--              <span id="posts-omitted-number">6</span> replies and-->
+<!--              &lt;!&ndash; TODO: This should tell the numbers of posts in thread with pictures. &ndash;&gt;-->
+<!--              <span id="pictures-omitted-number">3</span> pictures omitted.-->
+<!--            </p>-->
+<!--          </div>-->
         </div>
         <div class="posts-container">
           <div class="posts-in-thread">

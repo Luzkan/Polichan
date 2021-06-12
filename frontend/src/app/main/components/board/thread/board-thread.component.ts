@@ -11,6 +11,8 @@ import {Post} from '../../../models/post.model';
 import {PostService} from '../../../services/post.service';
 import {AbstractCleanable} from '../../../../core/cleanable/abstract-cleanable.component';
 import {Pageable} from '../../../../core/api/pageable.model';
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {ErrorModalComponent} from '../../../../shared/error/error-modal.component';
 
 @Component({
   selector: 'app-board-thread',
@@ -32,6 +34,7 @@ export class BoardThreadComponent extends AbstractCleanable implements OnInit {
   private readonly pageable = Pageable.forLimit(3);
 
   constructor(private readonly changeDetector: ChangeDetectorRef,
+              private readonly modalService: BsModalService,
               private readonly postService: PostService) {
     super();
   }
@@ -57,12 +60,16 @@ export class BoardThreadComponent extends AbstractCleanable implements OnInit {
             .subscribe((posts) => {
               this.posts = posts;
               this.changeDetector.markForCheck();
-            }),
+            }, () => this.handleLoadingPostsError()),
         'loadPostsForThread',
     );
   }
 
   private getThread(): Thread {
     return this.safeGetter(this.thread, 'thread');
+  }
+
+  private handleLoadingPostsError(): void {
+    this.modalService.show(ErrorModalComponent);
   }
 }

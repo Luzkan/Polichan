@@ -10,6 +10,6 @@
     <app-board-thread *ngFor="let thread of threads" [thread]="thread"></app-board-thread>
   </div>
 
-  <a *ngIf="!allThreadLoaded" (click)="loadNextPage()">{{ "Board.LoadMore" | translate}}</a>
+  <a *ngIf="!allThreadLoaded" (click)="loadNextPage()" class="load-more-button">{{ "Board.LoadMore" | translate}}</a>
 </div>
 

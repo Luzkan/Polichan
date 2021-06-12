@@ -14,6 +14,15 @@
   "Board.Title.Poli": "/poli/ - Politechnika",
   "Board.Title.Random": "/random/ - Tematy Przeróżne",
 
+  "DateAgo.Ago.Second": "{count} {count, plural, one{second} other{seconds}} ago",
+  "DateAgo.Ago.Minute": "{count} {count, plural, one{minute} other{minutes}} ago",
+  "DateAgo.Ago.Hour": "{count} {count, plural, one{hour} other{hours}} ago",
+  "DateAgo.Ago.Day": "{count} {count, plural, one{day} other{days}} ago",
+  "DateAgo.Ago.Week": "{count} {count, plural, one{week} other{weeks}} ago",
+  "DateAgo.Ago.Month": "{count} {count, plural, one{month} other{months}} ago",
+  "DateAgo.Ago.Year": "{count} {count, plural, one{year} other{years}} ago",
+  "DateAgo.Now": "Just now",
+
   "EntryForm.Label.Nickname": "Nickname",
   "EntryForm.Label.Password": "Password",
   "EntryForm.Label.Text": "Text",
@@ -21,6 +30,9 @@
   "EntryForm.Image.MaxSize": "Maximum filesize",
   "EntryForm.Image.SupportedTypes": "Supported filetypes",
   "EntryForm.Submit": "Submit",
+
+  "ReplyForm.InvalidValue": "Invalid value",
+  "ReplyForm.LengthValidationError": "Field cannot be blank (max {length} characters)",
 
   "Header.Navbar.Item.Arch": "arch",
   "Header.Navbar.Item.Bio": "bio",
@@ -37,9 +49,16 @@
   "Header.Options": "Options",
   "Header.Title": "Polichan",
 
+  "Modal.Error.Authentication.Ok": "Ok, I understand",
+  "Modal.Error.Authentication.Header": "Invalid password!",
+  "Modal.Error.Authentication.Message": "The given nickname is already in use. Use a different one or enter the correct password",
+  "Modal.Error.Default.Ok": "Ok, I will try later",
+  "Modal.Error.Default.Header": "Ups!",
+  "Modal.Error.Default.Message": "Sorry, something went wrong!",
+
   "Thread.LoadNextPage": "Load next page",
+
   "ThreadsBoard.ThreadDetails": "Check details",
   "ThreadsBoard.ShowLastPosts": "Show last posts",
   "ThreadsBoard.HideLastPosts": "Hide last posts"
-
 }

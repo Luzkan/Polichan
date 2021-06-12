@@ -26,6 +26,10 @@ export abstract class AbstractBoardComponent extends AbstractCleanable implement
 
   protected abstract getThreadsForPage(pageable: Pageable): Observable<Thread[]>;
 
+  protected abstract handleLoadingPageError(error: any): void;
+
+  protected abstract handleThreadSaveError(error: any): void;
+
   protected setTitleForCategory(categoryId: ThreadCategory): void {
     const categoryKey = categoryId.charAt(0).toUpperCase() + categoryId.slice(1).toLowerCase();
     this.titleTranslationKey = `Board.Title.${categoryKey}`;
@@ -60,7 +64,7 @@ export abstract class AbstractBoardComponent extends AbstractCleanable implement
           this.setAdditionalThreads(additionalThreads);
           this.updatePageable(additionalThreads, this.pageable);
           this.markForCheck();
-        }),
+        }, (error) => this.handleLoadingPageError(error)),
         'PageLoad',
     );
   }
@@ -83,7 +87,7 @@ export abstract class AbstractBoardComponent extends AbstractCleanable implement
         this.threadService.saveThread(thread).subscribe(() => {
           this.allThreadLoaded = false;
           this.markForCheck();
-        }),
+        }, (error) => this.handleThreadSaveError(error)),
         'saveThread',
     );
   }

@@ -1,0 +1,12 @@
+.post-image {
+  max-height: 512px;
+  max-width: 480px;
+}
+
+.enlarged-image {
+  pointer-events: all;
+}
+
+.modal-full-image {
+  pointer-events: none;
+}
