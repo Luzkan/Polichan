@@ -1,15 +1,16 @@
 package pwr.piisw.backend.models;
+
+import org.springframework.data.domain.Sort;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.domain.Sort;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class PostPage {
   private int pageNumber = 0;
   private int pageSize = 5;

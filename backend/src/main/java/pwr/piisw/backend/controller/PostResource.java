@@ -5,6 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import pwr.piisw.backend.exceptions.BadPasswordException;
+import pwr.piisw.backend.exceptions.ThreadNotFoundException;
 import pwr.piisw.backend.models.Post;
 import pwr.piisw.backend.models.PostPage;
 import pwr.piisw.backend.services.PostService;
@@ -29,6 +32,13 @@ public class PostResource {
   // add a post with a given threadId
   @PostMapping("posts")
   public ResponseEntity<Post> savePost(@RequestBody Post post) {
-    return new ResponseEntity<>(postService.savePost(post), HttpStatus.OK);
+    try {
+      Post new_post = postService.savePost(post);
+      return new ResponseEntity<>(new_post, HttpStatus.OK);
+    } catch (ThreadNotFoundException t) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    } catch (BadPasswordException b) {
+      return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
   }
 }
