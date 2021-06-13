@@ -1,10 +1,13 @@
 package pwr.piisw.backend.controller;
+
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import pwr.piisw.backend.models.ChanThread;
 import pwr.piisw.backend.services.ChanThreadService;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -27,9 +30,9 @@ public class ChanThreadResource {
   }
 
   @GetMapping("threads")
-  public ResponseEntity<List<ChanThread>> getAllChanThread(@RequestParam(required = false) int limit, @RequestParam(required = false) int offset) {
-      List<ChanThread> allChanThreads = chanThreadService.getAllChanThreads(limit, offset);
-      return new ResponseEntity<>(allChanThreads, HttpStatus.OK);
-
+  public ResponseEntity<List<ChanThread>> getAllChanThread(
+      @RequestParam(required = false) int limit, @RequestParam(required = false) int offset) {
+    List<ChanThread> allChanThreads = chanThreadService.getAllChanThreads(limit, offset);
+    return new ResponseEntity<>(allChanThreads, HttpStatus.OK);
   }
 }

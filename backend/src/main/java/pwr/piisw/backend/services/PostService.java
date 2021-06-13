@@ -3,11 +3,13 @@ package pwr.piisw.backend.services;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import pwr.piisw.backend.exceptions.BadPasswordException;
 import pwr.piisw.backend.exceptions.ThreadNotFoundException;
 import pwr.piisw.backend.helper.OffsetBasedPageRequest;
@@ -49,12 +51,12 @@ public class PostService {
     }
   }
 
-/*
-  public List<ChanThread> getAllChanThreads (int limit, int offset) {
-    Pageable pageable = new OffsetBasedPageRequest(limit, offset, "threadId", Sort.Direction.DESC);
-    return chanThreadRepo.findAll(pageable).getContent();
-  }
- */
+  /*
+   public List<ChanThread> getAllChanThreads (int limit, int offset) {
+     Pageable pageable = new OffsetBasedPageRequest(limit, offset, "threadId", Sort.Direction.DESC);
+     return chanThreadRepo.findAll(pageable).getContent();
+   }
+  */
 
   public List<Post> getPosts(Integer threadId, int limit, int offset) {
     Pageable pageable = new OffsetBasedPageRequest(limit, offset, "id", Sort.Direction.ASC);

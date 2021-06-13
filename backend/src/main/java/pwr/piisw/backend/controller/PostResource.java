@@ -1,14 +1,16 @@
 package pwr.piisw.backend.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import pwr.piisw.backend.exceptions.BadPasswordException;
 import pwr.piisw.backend.exceptions.ThreadNotFoundException;
 import pwr.piisw.backend.models.Post;
 import pwr.piisw.backend.services.PostService;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -22,9 +24,10 @@ public class PostResource {
 
   // get posts for thread of given id
   @GetMapping("/threads/{id}/posts")
-  public ResponseEntity<List<Post>> getPosts(@PathVariable("id") int id,
-                                             @RequestParam(required = false) int limit,
-                                             @RequestParam(required = false) int offset) {
+  public ResponseEntity<List<Post>> getPosts(
+      @PathVariable("id") int id,
+      @RequestParam(required = false) int limit,
+      @RequestParam(required = false) int offset) {
     List<Post> posts = postService.getPosts(id, limit, offset);
     return new ResponseEntity<>(posts, HttpStatus.OK);
   }
