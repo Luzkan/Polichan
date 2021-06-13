@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import pwr.piisw.backend.dto.PostDto;
@@ -36,6 +37,7 @@ public class PostResource {
 
   // add a post with a given threadId
   @PostMapping("posts")
+  @ResponseStatus(HttpStatus.CREATED)
   @ResponseBody
   public PostDto savePost(@RequestBody Post post) {
     Post post_created = postService.savePost(post);

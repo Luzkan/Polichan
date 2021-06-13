@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import pwr.piisw.backend.dto.ChanThreadDto;
@@ -23,6 +24,7 @@ public class ChanThreadResource {
   }
 
   @PostMapping("threads")
+  @ResponseStatus(HttpStatus.CREATED)
   @ResponseBody
   public ChanThreadDto saveThread(@RequestBody ChanThread chanThread) {
     return convertToDto(chanThreadService.saveThread(chanThread));
