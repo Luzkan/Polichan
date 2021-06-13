@@ -13,7 +13,6 @@ import pwr.piisw.backend.models.ChanThread;
 import pwr.piisw.backend.services.ChanThreadService;
 
 @RestController
-@RequestMapping("/api")
 public class ChanThreadResource {
   private final ChanThreadService chanThreadService;
 
@@ -40,7 +39,8 @@ public class ChanThreadResource {
   @GetMapping("threads")
   @ResponseBody
   public List<ChanThreadDto> getAllChanThread(
-      @RequestParam(required = false) int limit, @RequestParam(required = false) int offset) {
+      @RequestParam(required = false, defaultValue = "5") int limit,
+      @RequestParam(required = false, defaultValue = "0") int offset) {
     List<ChanThread> allChanThreads = chanThreadService.getAllChanThreads(limit, offset);
     return allChanThreads.stream().map(this::convertToDto).collect(Collectors.toList());
   }

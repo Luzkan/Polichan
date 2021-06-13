@@ -13,7 +13,6 @@ import pwr.piisw.backend.models.Post;
 import pwr.piisw.backend.services.PostService;
 
 @RestController
-@RequestMapping("/api")
 public class PostResource {
   private final PostService postService;
 

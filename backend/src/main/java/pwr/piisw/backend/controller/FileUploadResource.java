@@ -15,17 +15,16 @@ import org.springframework.web.multipart.MultipartFile;
 import pwr.piisw.backend.helper.FileUploadHelper;
 
 @RestController
-@RequestMapping("/api")
 public class FileUploadResource {
 
   @Autowired private FileUploadHelper fileUploadHelper;
 
   @PostMapping("/resources")
-  public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+  public ResponseEntity<String> uploadFile(@RequestParam("image") MultipartFile file) {
 
     try {
       if (file.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Request file");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Request image");
       }
 
       List<String> types = Arrays.asList("image/png", "image/jpeg", "image/gif");
