@@ -2,19 +2,12 @@ package pwr.piisw.backend.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
 import javax.persistence.*;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
+
 public class Post implements Serializable {
   @Id
   @GeneratedValue
