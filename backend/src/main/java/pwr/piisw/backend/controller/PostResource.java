@@ -1,14 +1,13 @@
 package pwr.piisw.backend.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import pwr.piisw.backend.exceptions.BadPasswordException;
-import pwr.piisw.backend.exceptions.ThreadNotFoundException;
+import pwr.piisw.backend.dto.PostDto;
 import pwr.piisw.backend.models.Post;
 import pwr.piisw.backend.services.PostService;
 
@@ -17,6 +16,8 @@ import pwr.piisw.backend.services.PostService;
 public class PostResource {
   private final PostService postService;
 
+  @Autowired private ModelMapper modelMapper;
+
   @Autowired
   public PostResource(PostService postService) {
     this.postService = postService;
@@ -24,24 +25,24 @@ public class PostResource {
 
   // get posts for thread of given id
   @GetMapping("/threads/{id}/posts")
-  public ResponseEntity<List<Post>> getPosts(
+  @ResponseBody
+  public List<PostDto> getPosts(
       @PathVariable("id") int id,
       @RequestParam(required = false) int limit,
       @RequestParam(required = false) int offset) {
     List<Post> posts = postService.getPosts(id, limit, offset);
-    return new ResponseEntity<>(posts, HttpStatus.OK);
+    return posts.stream().map(this::convertToDto).collect(Collectors.toList());
   }
 
   // add a post with a given threadId
   @PostMapping("posts")
-  public ResponseEntity<Post> savePost(@RequestBody Post post) {
-    try {
-      Post new_post = postService.savePost(post);
-      return new ResponseEntity<>(new_post, HttpStatus.OK);
-    } catch (ThreadNotFoundException t) {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    } catch (BadPasswordException b) {
-      return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-    }
+  @ResponseBody
+  public PostDto savePost(@RequestBody Post post) {
+    Post post_created = postService.savePost(post);
+    return convertToDto(post_created);
+  }
+
+  private PostDto convertToDto(Post post) {
+    return modelMapper.map(post, PostDto.class);
   }
 }
