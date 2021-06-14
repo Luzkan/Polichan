@@ -13,6 +13,6 @@ public interface ChanThreadRepo extends JpaRepository<ChanThread, Integer> {
 
   ChanThread findAllBythreadId(Integer threadId);
 
-  // @Query(nativeQuery=true, value="SELECT *  FROM chan_thread")
+  // @Query(nativeQuery=true, value="SELECT *  FROM chan_thread ORDER by RAND()")
   // Page<ChanThread> findRandomChanThreads(Pageable chanThreads);
 }

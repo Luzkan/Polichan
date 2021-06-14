@@ -28,8 +28,8 @@ public class PostResource {
   @ResponseBody
   public List<PostDto> getPosts(
       @PathVariable("id") int id,
-      @RequestParam(required = false) int limit,
-      @RequestParam(required = false) int offset) {
+      @RequestParam(required = false, defaultValue = "5") int limit,
+      @RequestParam(required = false, defaultValue = "0") int offset) {
     List<Post> posts = postService.getPosts(id, limit, offset);
     return posts.stream().map(this::convertToDto).collect(Collectors.toList());
   }
