@@ -7,7 +7,7 @@
     "start-prod": "ng serve -c=production",
     "build": "ng build",
     "build-prod": "ng build --prod",
-    "test": "ng test",
+    "test": "ng test --no-watch --no-progress",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts .",
     "lint-fix": "eslint --ignore-path .gitignore --ext .js,.ts . --fix ",
     "e2e": "ng e2e"
