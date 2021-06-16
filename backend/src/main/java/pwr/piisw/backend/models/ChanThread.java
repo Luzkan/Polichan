@@ -24,5 +24,5 @@ public class ChanThread implements Serializable {
   private String imgUrl;
   private LocalDateTime date;
 
-  @ElementCollection private Map<String, String> map = new HashMap<String, String>();
+  @ElementCollection private Map<String, String> accounts = new HashMap<>();
 }

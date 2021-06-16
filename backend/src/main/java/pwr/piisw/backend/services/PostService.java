@@ -36,16 +36,16 @@ public class PostService {
         chanThreadRepo
             .findById(post.getThreadId())
             .orElseThrow(() -> new ThreadNotFoundException("Thread not found exception"));
-    Map<String, String> map = chanThread.getMap();
+    Map<String, String> accounts = chanThread.getAccounts();
 
-    if (map.containsKey(post.getNickname())) {
-      if (encoder.matches(post.getPassword(), map.get(post.getNickname()))) {
+    if (accounts.containsKey(post.getNickname())) {
+      if (encoder.matches(post.getPassword(), accounts.get(post.getNickname()))) {
         return postRepo.save(post);
       } else {
         throw new BadPasswordException("User password does not match");
       }
     } else {
-      map.put(post.getNickname(), encoder.encode(post.getPassword()));
+      accounts.put(post.getNickname(), encoder.encode(post.getPassword()));
       chanThreadRepo.save(chanThread);
       return postRepo.save(post);
     }

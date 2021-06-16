@@ -7,10 +7,10 @@ public class OffsetBasedPageRequest implements Pageable {
 
   private int limit;
   private int offset;
-  private String sort_by;
+  private String sortBy;
   private Sort.Direction direction;
 
-  public OffsetBasedPageRequest(int limit, int offset, String sort_by, Sort.Direction direction) {
+  public OffsetBasedPageRequest(int limit, int offset, String sortBy, Sort.Direction direction) {
     if (limit < 1) {
       throw new IllegalArgumentException("Limit must not be less than one!");
     }
@@ -19,7 +19,7 @@ public class OffsetBasedPageRequest implements Pageable {
     }
     this.limit = limit;
     this.offset = offset;
-    this.sort_by = sort_by;
+    this.sortBy = sortBy;
     this.direction = direction;
   }
 
@@ -40,7 +40,7 @@ public class OffsetBasedPageRequest implements Pageable {
 
   @Override
   public Sort getSort() {
-    return Sort.by(direction, sort_by);
+    return Sort.by(direction, sortBy);
   }
 
   @Override
@@ -48,14 +48,14 @@ public class OffsetBasedPageRequest implements Pageable {
     // Typecast possible because number of entries cannot be bigger than integer (primary key is
     // integer)
     return new OffsetBasedPageRequest(
-        getPageSize(), (int) (getOffset() + getPageSize()), sort_by, direction);
+        getPageSize(), (int) (getOffset() + getPageSize()), sortBy, direction);
   }
 
   public Pageable previous() {
     // The integers are positive. Subtracting does not let them become bigger than integer.
     return hasPrevious()
         ? new OffsetBasedPageRequest(
-            getPageSize(), (int) (getOffset() - getPageSize()), sort_by, direction)
+            getPageSize(), (int) (getOffset() - getPageSize()), sortBy, direction)
         : this;
   }
 
@@ -66,7 +66,7 @@ public class OffsetBasedPageRequest implements Pageable {
 
   @Override
   public Pageable first() {
-    return new OffsetBasedPageRequest(getPageSize(), 0, sort_by, direction);
+    return new OffsetBasedPageRequest(getPageSize(), 0, sortBy, direction);
   }
 
   @Override

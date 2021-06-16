@@ -25,9 +25,9 @@ public class ChanThreadService {
 
   public ChanThread saveThread(ChanThread chanThread) {
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    Map<String, String> map = chanThread.getMap();
-    map.put(chanThread.getNickname(), encoder.encode(chanThread.getPassword()));
-    chanThread.setMap(map);
+    Map<String, String> accounts = chanThread.getAccounts();
+    accounts.put(chanThread.getNickname(), encoder.encode(chanThread.getPassword()));
+    chanThread.setAccounts(accounts);
     chanThread.setDate(LocalDateTime.now());
     return chanThreadRepo.save(chanThread);
   }
