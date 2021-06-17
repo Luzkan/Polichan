@@ -44,7 +44,6 @@ describe('DateAgoPipe', () => {
   });
 
   it('should inform that the post has just been created', () => {
-    // expect(0).toBe(1);
     testAgo(0, 'DateAgo.Now');
   });
 
