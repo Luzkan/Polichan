@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ChanThreadResource {
   private final ChanThreadService chanThreadService;
-
   private final ModelMapper modelMapper;
   private final PostService postService;
 

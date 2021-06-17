@@ -15,19 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PostResource {
   private final PostService postService;
-
   private final ModelMapper modelMapper;
-
-  // get posts for thread of given id
-  //  @GetMapping("/threads/{id}/posts")
-  //  @ResponseBody
-  //  public List<PostDto> getPosts(
-  //      @PathVariable("id") int id,
-  //      @RequestParam(required = false, defaultValue = "5") int limit,
-  //      @RequestParam(required = false, defaultValue = "0") int offset) {
-  //    List<Post> posts = postService.getPosts(id, limit, offset);
-  //    return posts.stream().map(this::convertToDto).collect(Collectors.toList());
-  //  }
 
   // add a post with a given threadId
   @PostMapping
