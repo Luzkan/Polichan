@@ -45,14 +45,14 @@ public class ChanThreadResource {
   @ResponseBody
   public List<ChanThreadDto> getAllChanThread(
       @RequestParam(required = false, defaultValue = "5") int limit,
-      @RequestParam(required = false, defaultValue = "0") int offset) {
-    List<ChanThread> allChanThreads = chanThreadService.getAllChanThreads(limit, offset);
+      @RequestParam(required = false, defaultValue = "0") int offset,
+      @RequestParam(required = false, defaultValue = "false") boolean random) {
+    List<ChanThread> allChanThreads = chanThreadService.getAllChanThreads(limit, offset, random);
     return allChanThreads.stream()
         .map(dtoHelper::convertChanThreadToDto)
         .collect(Collectors.toList());
   }
 
-  //
   @GetMapping("/{id}/posts")
   @ResponseBody
   public List<PostDto> getPosts(
