@@ -34,8 +34,8 @@ public class ImageResource {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   @ResponseBody
-  public ImageDto uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-    Image uploadedImage = imageService.store(file);
+  public ImageDto uploadFile(@RequestParam("image") MultipartFile image) throws IOException {
+    Image uploadedImage = imageService.store(image);
     return convertImageToDto(uploadedImage);
   }
 
