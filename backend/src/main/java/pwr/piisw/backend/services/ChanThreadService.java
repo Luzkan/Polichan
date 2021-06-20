@@ -32,7 +32,7 @@ public class ChanThreadService {
     System.out.println("ImageResourceId: " + chanThread.getImageResourceId());
     Optional<Image> i = imageRepo.findById(chanThread.getImageResourceId());
     if (i.isPresent()) {
-      chanThread.setImgUrl("/resources/" + chanThread.getImageResourceId());
+      chanThread.setImgUrl("/api/resources/" + chanThread.getImageResourceId());
     }
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -43,18 +43,24 @@ public class ChanThreadService {
     return chanThreadRepo.save(chanThread);
   }
 
-  public ChanThread getChanThread(Integer chanThreadId) {
-    return chanThreadRepo.findAllBythreadId(chanThreadId);
+  public ChanThread getChanThread(Integer chanThreadId) throws Exception {
+    return chanThreadRepo.findById(chanThreadId).orElseThrow(Exception::new);
   }
 
-  public List<ChanThread> getAllChanThreads(int limit, int offset, boolean random) {
+  public List<ChanThread> getAllChanThreads(
+      int limit, int offset, boolean random, String category) {
     if (random) {
       Pageable pageable = PageRequest.of(0, limit);
       return chanThreadRepo.findRandomChanThreads(pageable).getContent();
     } else {
-      Pageable pageable =
-          new OffsetBasedPageRequest(limit, offset, "threadId", Sort.Direction.DESC);
-      return chanThreadRepo.findAll(pageable).getContent();
+      if (!category.equals("false")) {
+        Pageable pageable = new OffsetBasedPageRequest(limit, offset, "id", Sort.Direction.DESC);
+        ChanThreadCategory enumCategory = ChanThreadCategory.valueOf(category);
+        return chanThreadRepo.findByCategory(pageable, enumCategory).getContent();
+      } else {
+        Pageable pageable = new OffsetBasedPageRequest(limit, offset, "id", Sort.Direction.DESC);
+        return chanThreadRepo.findAll(pageable).getContent();
+      }
     }
   }
 }

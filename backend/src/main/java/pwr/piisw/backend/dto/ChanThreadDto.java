@@ -8,7 +8,7 @@ import lombok.*;
 
 @Data
 public class ChanThreadDto {
-  private Integer threadId;
+  private Integer id;
   private ChanThreadCategory category;
   private String nickname;
   private String content;

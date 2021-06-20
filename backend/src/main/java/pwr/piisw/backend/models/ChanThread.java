@@ -17,7 +17,7 @@ public class ChanThread implements Serializable {
   @Column(nullable = false, updatable = false)
 
   // zmienic na id
-  private Integer threadId;
+  private Integer id;
 
   private ChanThreadCategory category;
   private String nickname;

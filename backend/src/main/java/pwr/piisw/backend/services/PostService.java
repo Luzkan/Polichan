@@ -42,10 +42,13 @@ public class PostService {
             .findById(post.getThreadId())
             .orElseThrow(() -> new ThreadNotFoundException("Thread not found exception"));
     Map<String, String> accounts = chanThread.getAccounts();
-    System.out.println("ImageResourceId: " + post.getImageResourceId());
-    Optional<Image> i = imageRepo.findById(post.getImageResourceId());
-    if (i.isPresent()) {
-      post.setImgUrl("/resources/" + post.getImageResourceId());
+
+    String image_id = post.getImageResourceId();
+    if (image_id != null && !image_id.equals("")) {
+      Optional<Image> i = imageRepo.findById(post.getImageResourceId());
+      if (i.isPresent()) {
+        post.setImgUrl("/api/resources/" + post.getImageResourceId());
+      }
     }
 
     if (accounts.containsKey(post.getNickname())) {

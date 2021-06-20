@@ -18,14 +18,14 @@ import pwr.piisw.backend.services.PostService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("threads")
+@RequestMapping
 @RequiredArgsConstructor
 public class ChanThreadResource {
   private final ChanThreadService chanThreadService;
   private final PostService postService;
   private final DtoHelper dtoHelper;
 
-  @PostMapping
+  @PostMapping("threads")
   @ResponseStatus(HttpStatus.CREATED)
   @ResponseBody
   public ChanThreadDto saveThread(@RequestBody ChanThreadDtoPOST chanThreadDtoPOST) {
@@ -34,26 +34,28 @@ public class ChanThreadResource {
             dtoHelper.convertChanThreadDtoPOSTToEntity(chanThreadDtoPOST)));
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("threads/{id}")
   @ResponseBody
-  public ChanThreadDto getChanThread(@PathVariable("id") int id) {
+  public ChanThreadDto getChanThread(@PathVariable("id") int id) throws Exception {
     ChanThread chanThread = chanThreadService.getChanThread(id);
     return dtoHelper.convertChanThreadToDto(chanThread);
   }
 
-  @GetMapping
+  @GetMapping("threads")
   @ResponseBody
   public List<ChanThreadDto> getAllChanThread(
       @RequestParam(required = false, defaultValue = "5") int limit,
       @RequestParam(required = false, defaultValue = "0") int offset,
-      @RequestParam(required = false, defaultValue = "false") boolean random) {
-    List<ChanThread> allChanThreads = chanThreadService.getAllChanThreads(limit, offset, random);
+      @RequestParam(required = false, defaultValue = "false") boolean random,
+      @RequestParam(required = false, defaultValue = "false") String category) {
+    List<ChanThread> allChanThreads =
+        chanThreadService.getAllChanThreads(limit, offset, random, category);
     return allChanThreads.stream()
         .map(dtoHelper::convertChanThreadToDto)
         .collect(Collectors.toList());
   }
 
-  @GetMapping("/{id}/posts")
+  @GetMapping("thread/{id}/posts")
   @ResponseBody
   public List<PostDto> getPosts(
       @PathVariable("id") int id,
