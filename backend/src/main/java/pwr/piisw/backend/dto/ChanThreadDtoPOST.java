@@ -13,6 +13,9 @@ public class ChanThreadDtoPOST {
   @NotNull(message = "category may not be null")
   private ChanThreadCategory category;
 
+  @NotNull(message = "content may not be null")
+  private String content;
+
   @NotNull(message = "password may not be null")
   @Length(min = 3, message = "Length must be more than 3")
   private String password;
@@ -20,4 +23,6 @@ public class ChanThreadDtoPOST {
   @NotNull(message = "nickname may not be null")
   @Length(min = 3, message = "Length must be more than 3")
   private String nickname;
+
+  private String imageResourceId;
 }

@@ -22,5 +22,5 @@ public class PostDtoPOST {
   @NotNull(message = "content may not be null")
   private String content;
 
-  private String imgUrl;
+  private String imageResourceId;
 }

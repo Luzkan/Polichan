@@ -28,6 +28,7 @@ public class DtoHelper {
   }
 
   public ChanThread convertChanThreadDtoPOSTToEntity(ChanThreadDtoPOST chanThreadDtoPOST) {
+    System.out.println("ID: " + chanThreadDtoPOST.getImageResourceId());
     return modelMapper.map(chanThreadDtoPOST, ChanThread.class);
   }
 }

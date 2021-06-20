@@ -3,6 +3,7 @@ package pwr.piisw.backend.services;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -14,19 +15,23 @@ import pwr.piisw.backend.exceptions.BadPasswordException;
 import pwr.piisw.backend.exceptions.ThreadNotFoundException;
 import pwr.piisw.backend.helper.OffsetBasedPageRequest;
 import pwr.piisw.backend.models.ChanThread;
+import pwr.piisw.backend.models.Image;
 import pwr.piisw.backend.models.Post;
 import pwr.piisw.backend.repository.ChanThreadRepo;
+import pwr.piisw.backend.repository.ImageRepo;
 import pwr.piisw.backend.repository.PostRepo;
 
 @Service
 public class PostService {
   private final PostRepo postRepo;
   private final ChanThreadRepo chanThreadRepo;
+  private final ImageRepo imageRepo;
 
   @Autowired
-  public PostService(PostRepo postRepo, ChanThreadRepo chanThreadRepo) {
+  public PostService(PostRepo postRepo, ChanThreadRepo chanThreadRepo, ImageRepo imageRepo) {
     this.postRepo = postRepo;
     this.chanThreadRepo = chanThreadRepo;
+    this.imageRepo = imageRepo;
   }
 
   public Post savePost(Post post) throws ThreadNotFoundException, BadPasswordException {
@@ -37,6 +42,11 @@ public class PostService {
             .findById(post.getThreadId())
             .orElseThrow(() -> new ThreadNotFoundException("Thread not found exception"));
     Map<String, String> accounts = chanThread.getAccounts();
+    System.out.println("ImageResourceId: " + post.getImageResourceId());
+    Optional<Image> i = imageRepo.findById(post.getImageResourceId());
+    if (i.isPresent()) {
+      post.setImgUrl("/resources/" + post.getImageResourceId());
+    }
 
     if (accounts.containsKey(post.getNickname())) {
       if (encoder.matches(post.getPassword(), accounts.get(post.getNickname()))) {

@@ -15,6 +15,8 @@ public class ChanThread implements Serializable {
   @Id
   @GeneratedValue
   @Column(nullable = false, updatable = false)
+
+  // zmienic na id
   private Integer threadId;
 
   private ChanThreadCategory category;
@@ -22,6 +24,7 @@ public class ChanThread implements Serializable {
   private String password;
   private String content;
   private String imgUrl;
+  private String imageResourceId;
   private LocalDateTime date;
 
   @ElementCollection private Map<String, String> accounts = new HashMap<>();

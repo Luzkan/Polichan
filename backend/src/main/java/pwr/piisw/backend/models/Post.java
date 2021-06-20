@@ -22,5 +22,6 @@ public class Post implements Serializable {
   private String password;
   private String content;
   private String imgUrl;
+  private String imageResourceId;
   private LocalDateTime date;
 }
