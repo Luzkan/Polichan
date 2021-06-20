@@ -6,11 +6,11 @@ import {SpinnerInterceptor} from './spinner/spinner-interceptor';
   declarations: [],
   imports: [],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: SpinnerInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: SpinnerInterceptor,
+    //   multi: true,
+    // },
   ],
 })
 export class CoreModule {
