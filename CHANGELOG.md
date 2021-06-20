@@ -9,20 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Dto POST method validation and getting rid of obsolete fields
-- Generate imgUrl while POST-ing thread and post
-
-### Fixed
-
-- Endpoints
-- Now the categories are working
-
-## [[0.8.4]] - 2021-06-18
-
-### Added
-
-- Uploading images to database
-- Default values for post limit and offset
+- Backend model
+- Backend REST Controller
+- Backend limit and offset
+- Backend endpoints
+- Database
 
 ## [[0.8.3]] - 2021-06-15
 
@@ -196,6 +187,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `README.md`
 
+[0.9.0]: https://github.com/Luzkan/Polichan/releases/tag/v0.9.0
 [0.8.3]: https://github.com/Luzkan/Polichan/releases/tag/v0.8.3
 [0.8.2]: https://github.com/Luzkan/Polichan/releases/tag/v0.8.2
 [0.8.1]: https://github.com/Luzkan/Polichan/releases/tag/v0.8.1
