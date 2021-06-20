@@ -1,8 +1,7 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {SpinnerControllerService} from './spinner-controller.service';
-import {filter, tap} from 'rxjs/operators';
 
 
 @Injectable()
@@ -10,14 +9,34 @@ export class SpinnerInterceptor implements HttpInterceptor {
   constructor(private readonly spinnerController: SpinnerControllerService) {
   }
 
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinnerController.show();
     const hideAction = this.createSingleHideAction();
 
-    return next.handle(req).pipe(
-        filter((e) => e.type !== 0),
-        tap(hideAction, hideAction, hideAction),
-    );
+    return new Observable((observer) => {
+      // And subscribe to the original observable to ensure the HttpRequest is made
+      const subscription = next.handle(req).subscribe(
+          (event) => {
+            if (event instanceof HttpResponse) {
+              hideAction();
+              observer.next(event);
+            }
+          },
+          (err) => {
+            hideAction();
+            observer.error(err);
+          },
+          () => {
+            hideAction();
+            observer.complete();
+          });
+      // return teardown logic in case of cancelled requests
+      return () => {
+        hideAction();
+        subscription.unsubscribe();
+      };
+    });
   }
 
   private createSingleHideAction(): () => void {
