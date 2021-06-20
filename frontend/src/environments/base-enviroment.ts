@@ -11,9 +11,10 @@ export const baseEnvironment = {
   url: {
     prefix: '/api',
     patterns: {
-      [ApiPatternKey.THREAD]: '/threads/{id}',
+
       [ApiPatternKey.THREADS]: '/threads',
       [ApiPatternKey.POSTS]: '/posts',
+      [ApiPatternKey.THREAD]: '/threads/{id}',
       [ApiPatternKey.THREAD_POSTS]: '/thread/{id}/posts',
       [ApiPatternKey.IMAGE_UPLOAD]: '/resources',
     } as Dictionary<string>,
