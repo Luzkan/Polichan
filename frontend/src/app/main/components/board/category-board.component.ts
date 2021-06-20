@@ -28,11 +28,6 @@ export class CategoryBoardComponent extends AbstractBoardComponent {
   }
 
   ngOnInit() {
-    this.init();
-    super.ngOnInit();
-  }
-
-  private init(): void {
     this.addSubscription(this.categorySource.subscribe((category) => {
       this.setTitleForCategory(category);
       this.setupReplyForm(category);
